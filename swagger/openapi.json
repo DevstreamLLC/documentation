@@ -1,0 +1,1294 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "description" : "API reference for Devstream platform built with Spring Boot.",
+    "license" : {
+      "name" : "GPL-2.0-only",
+      "url" : "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html#SEC1"
+    },
+    "termsOfService" : "https://www.devstream.in/terms-and-conditions",
+    "title" : "Devstream Aurelia OpenAPI Specification",
+    "version" : "0.3.19"
+  },
+  "servers" : [ {
+    "url" : "{protocol}://{environment}.devstream.in/v1",
+    "variables" : {
+      "protocol" : {
+        "default" : "https",
+        "enum" : [ "http", "https" ]
+      },
+      "environment" : {
+        "default" : "api",
+        "enum" : [ "api", "api.dev", "api.staging", "api.test" ]
+      }
+    }
+  } ],
+  "tags" : [ {
+    "description" : "Endpoints related to user authentication (login, register, refresh token, forgot password, reset password).",
+    "name" : "Auth"
+  }, {
+    "description" : "Endpoints for managing content (creating, retrieving, updating, deleting content, analytics).",
+    "name" : "Content"
+  }, {
+    "description" : "Endpoint for checking the health of the API service.",
+    "name" : "Health"
+  }, {
+    "description" : "Endpoints for interacting with external platforms (syncing data, retrieving platform information).",
+    "name" : "Platforms"
+  }, {
+    "description" : "Endpoints for managing user information (profile, settings, analytics).",
+    "name" : "User"
+  } ],
+  "paths" : {
+    "/health" : {
+      "get" : {
+        "description" : "Health check for the API.",
+        "operationId" : "health-check",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Health"
+                }
+              }
+            },
+            "description" : "Success."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid input or parameters provided."
+          },
+          "503" : {
+            "description" : "Service unavailable. The system is under maintenance or overloaded."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Health check for the API.",
+        "tags" : [ "Health" ]
+      }
+    },
+    "/user/profile" : {
+      "get" : {
+        "operationId" : "get-user-profile-information",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserProfile"
+                }
+              }
+            },
+            "description" : "User profile retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid request format or parameters."
+          },
+          "401" : {
+            "description" : "Unauthorized. Authentication required to view the profile."
+          },
+          "404" : {
+            "description" : "Not found. User profile does not exist."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Retrieve the current user's profile information.",
+        "tags" : [ "User" ]
+      },
+      "patch" : {
+        "operationId" : "update-user-profile-information",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UserProfile"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "User profile updated successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid request format or missing required fields."
+          },
+          "401" : {
+            "description" : "Unauthorized. Authentication required to update the profile."
+          },
+          "404" : {
+            "description" : "Not found. User profile does not exist."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Update user profile details.",
+        "tags" : [ "User" ]
+      }
+    },
+    "/user/settings" : {
+      "get" : {
+        "operationId" : "get-user-settings",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserSettings"
+                }
+              }
+            },
+            "description" : "Settings retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid request format or parameters."
+          },
+          "401" : {
+            "description" : "Unauthorized. Authentication required to view settings."
+          },
+          "404" : {
+            "description" : "Not found. User settings do not exist."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Retrieve user-specific settings.",
+        "tags" : [ "User" ]
+      },
+      "patch" : {
+        "operationId" : "update-user-settings",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateUserSettingsRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Settings updated successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid request format or missing required fields."
+          },
+          "401" : {
+            "description" : "Unauthorized. Authentication required to update settings."
+          },
+          "404" : {
+            "description" : "Not found. User settings do not exist."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Update user-specific settings.",
+        "tags" : [ "User" ]
+      }
+    },
+    "/user/analytics" : {
+      "get" : {
+        "operationId" : "get-user-analytics",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/UserAnalytics"
+                }
+              }
+            },
+            "description" : "User analytics retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid request format or parameters."
+          },
+          "401" : {
+            "description" : "Unauthorized. Authentication required to view analytics."
+          },
+          "404" : {
+            "description" : "Not found. User analytics data does not exist."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "View overall analytics for the user.",
+        "tags" : [ "User" ]
+      }
+    },
+    "/user/{user_id}" : {
+      "delete" : {
+        "operationId" : "delete-user-profile",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/UserIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "User deleted successfully."
+          },
+          "404" : {
+            "description" : "User with given ID not found."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Deletes user profile.",
+        "tags" : [ "User" ]
+      }
+    },
+    "/auth/login" : {
+      "post" : {
+        "operationId" : "authenticate-user",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LoginResponse"
+                }
+              }
+            },
+            "description" : "Login successful."
+          },
+          "400" : {
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid credentials provided."
+          },
+          "403" : {
+            "description" : "Forbidden. Access to the resource is denied."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Log in to the system.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/auth/register" : {
+      "post" : {
+        "operationId" : "register-user",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RegisterRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RegisterResponse"
+                }
+              }
+            },
+            "description" : "Registration successful."
+          },
+          "400" : {
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "409" : {
+            "description" : "Conflict. A user with the provided details already exists."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Registers a new user.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/auth/refresh-token" : {
+      "post" : {
+        "operationId" : "refresh-auth-token",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RefreshTokenResponse"
+                }
+              }
+            },
+            "description" : "Token refreshed successfully."
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description" : "Bad Request. The refresh token is missing or invalid."
+          },
+          "401" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description" : "Unauthorized. The provided refresh token is expired or revoked."
+          },
+          "403" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description" : "Forbidden. The request is not authorized (e.g., due to account restrictions)."
+          },
+          "404" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description" : "Not Found. The resource associated with the refresh token could not be found (unlikely, but possible)."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Refresh the authentication token.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/auth/forgot-password" : {
+      "post" : {
+        "operationId" : "reset-password",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ForgotPasswordRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Password reset request processed successfully."
+          },
+          "302" : {
+            "description" : "Found. User is already authenticated and redirected.",
+            "headers" : {
+              "Location" : {
+                "description" : "URL where the user is redirected.",
+                "explode" : false,
+                "schema" : {
+                  "format" : "uri",
+                  "type" : "string"
+                },
+                "style" : "simple"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid authentication provided."
+          },
+          "403" : {
+            "description" : "Forbidden. The user does not have permission to perform this action."
+          },
+          "404" : {
+            "description" : "Not found. The user does not exist in the system."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          },
+          "503" : {
+            "description" : "Service unavailable. System is under maintenance or overloaded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Request a password reset link.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/auth/reset-password" : {
+      "post" : {
+        "operationId" : "reset-user-password",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Password reset successfully."
+          },
+          "400" : {
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid authentication provided."
+          },
+          "403" : {
+            "description" : "Forbidden. The user does not have permission to reset the password."
+          },
+          "404" : {
+            "description" : "Not found. The user does not exist in the system."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Reset the user's password.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/content" : {
+      "get" : {
+        "operationId" : "get-all-content-by-user-id",
+        "parameters" : [ {
+          "description" : "Filter content (e.g., by date or platform).",
+          "explode" : true,
+          "in" : "query",
+          "name" : "filter",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ContentListResponse"
+                }
+              }
+            },
+            "description" : "List of content retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid filter parameters."
+          },
+          "404" : {
+            "description" : "No content found for the given filters."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          },
+          "503" : {
+            "description" : "Service unavailable. The system is under maintenance or overloaded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "List all user content with optional filters.",
+        "tags" : [ "Content" ]
+      }
+    },
+    "/content/{content_id}" : {
+      "delete" : {
+        "operationId" : "delete-content",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/ContentIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Content deleted successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid or missing parameters."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid authentication provided."
+          },
+          "403" : {
+            "description" : "Forbidden. Access to delete the content is denied."
+          },
+          "404" : {
+            "description" : "Content not found."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Delete a specific piece of content.",
+        "tags" : [ "Content" ]
+      },
+      "get" : {
+        "operationId" : "get-content-details",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/ContentIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ContentDetails"
+                }
+              }
+            },
+            "description" : "Content details retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid or missing parameters."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid authentication provided."
+          },
+          "403" : {
+            "description" : "Forbidden. Access to the content is denied."
+          },
+          "404" : {
+            "description" : "Content not found."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Retrieve details for a specific piece of content.",
+        "tags" : [ "Content" ]
+      }
+    },
+    "/content/status/{content_id}" : {
+      "get" : {
+        "operationId" : "get-content-status",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/ContentIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ContentStatusResponse"
+                }
+              }
+            },
+            "description" : "Content status retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid or missing parameters."
+          },
+          "404" : {
+            "description" : "Content not found. The specified content ID does not exist."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          },
+          "503" : {
+            "description" : "Service unavailable. The system is under maintenance or overloaded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Check the status of a specific piece of content.",
+        "tags" : [ "Content" ]
+      }
+    },
+    "/content/invite/{content_id}" : {
+      "get" : {
+        "operationId" : "get-pending-invitations",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/ContentIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CollaborationActionResponse"
+                }
+              }
+            },
+            "description" : "List of pending invitations."
+          },
+          "404" : {
+            "description" : "Content not found. The specified content ID does not exist."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "View pending collaboration invitations.",
+        "tags" : [ "Content" ]
+      },
+      "patch" : {
+        "description" : "The user can accept or decline content request invitation. Need to consider whether to make a new endpoint for accept/decline invitations and use this endpoint for modifying access control instead. Reference of Google Zanziber can be used for access control.",
+        "operationId" : "update-pending-invites-for-content-by-id",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/ContentIDParam"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CollaborationActionResponse"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Invitation status updated."
+          },
+          "400" : {
+            "description" : "Bad request. The action is invalid or the request is malformed."
+          },
+          "404" : {
+            "description" : "Invitation not found. No invitation for the specified content ID."
+          },
+          "409" : {
+            "description" : "Conflict. The action cannot be performed due to a conflict in the invitation status."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Accept or decline invitations.",
+        "tags" : [ "Content" ]
+      },
+      "post" : {
+        "operationId" : "send-collaboration-invitations",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/ContentIDParam"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CollaborationRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Invitation sent successfully."
+          },
+          "400" : {
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "404" : {
+            "description" : "Content not found. The specified content ID does not exist."
+          },
+          "409" : {
+            "description" : "Conflict. Invitation already exists for the user."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Invite users to collaborate on content.",
+        "tags" : [ "Content" ]
+      }
+    },
+    "/content/analytics/{content_id}" : {
+      "get" : {
+        "operationId" : "get-content-analytics",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/ContentIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ContentAnalytics"
+                }
+              }
+            },
+            "description" : "Analytics data retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid or missing parameters."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid authentication provided."
+          },
+          "403" : {
+            "description" : "Forbidden. Access to the content's analytics is denied."
+          },
+          "404" : {
+            "description" : "Content not found."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "View analytics for a specific piece of content.",
+        "tags" : [ "Content" ]
+      }
+    },
+    "/platforms/{platform_id}" : {
+      "delete" : {
+        "operationId" : "disconnect-platform",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/PlatformIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Platform disconnected successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid platform ID or missing parameters."
+          },
+          "403" : {
+            "description" : "Forbidden. The user does not have permission to disconnect the platform."
+          },
+          "404" : {
+            "description" : "Not found. The platform does not exist."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Disconnect an existing platform.",
+        "tags" : [ "Platforms" ]
+      },
+      "post" : {
+        "operationId" : "connect-platform",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/PlatformIDParam"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Platform connected successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid platform ID or missing parameters."
+          },
+          "403" : {
+            "description" : "Forbidden. The user does not have permission to connect the platform."
+          },
+          "404" : {
+            "description" : "Not found. The platform does not exist."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Connect a new platform.",
+        "tags" : [ "Platforms" ]
+      }
+    },
+    "/platforms/sync" : {
+      "post" : {
+        "operationId" : "sync-all-external-platforms",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/PlatformSyncRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Platform sync initiated successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid sync request or missing parameters."
+          },
+          "401" : {
+            "description" : "Unauthorized. Authentication required to sync content."
+          },
+          "403" : {
+            "description" : "Forbidden. The user does not have permission to sync content."
+          },
+          "404" : {
+            "description" : "Not found. The specified platform could not be found."
+          },
+          "500" : {
+            "description" : "Internal server error. Something went wrong on the server."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Sync content from external platforms.",
+        "tags" : [ "Platforms" ]
+      }
+    }
+  },
+  "components" : {
+    "parameters" : {
+      "UserIDParam" : {
+        "explode" : false,
+        "in" : "path",
+        "name" : "user_id",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        },
+        "style" : "simple"
+      },
+      "ContentIDParam" : {
+        "explode" : false,
+        "in" : "path",
+        "name" : "content_id",
+        "required" : true,
+        "schema" : {
+          "$ref" : "#/components/schemas/ContentID"
+        },
+        "style" : "simple"
+      },
+      "PlatformIDParam" : {
+        "explode" : false,
+        "in" : "path",
+        "name" : "platform_id",
+        "required" : true,
+        "schema" : {
+          "$ref" : "#/components/schemas/Platform"
+        },
+        "style" : "simple"
+      }
+    },
+    "schemas" : {
+      "Health" : {
+        "properties" : {
+          "timestamp" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "uptime" : {
+            "description" : "Server uptime in milliseconds in UNIX format",
+            "type" : "integer"
+          },
+          "status" : {
+            "description" : "Status message, e.g. for describing errors",
+            "type" : "string"
+          }
+        }
+      },
+      "UserProfile" : {
+        "properties" : {
+          "userID" : {
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "username" : {
+            "type" : "string"
+          },
+          "email" : {
+            "format" : "email",
+            "type" : "string"
+          },
+          "avatarURL" : {
+            "format" : "uri",
+            "type" : "string"
+          }
+        },
+        "required" : [ "avatarURL", "email", "userID", "username" ]
+      },
+      "UserSettings" : {
+        "properties" : {
+          "notifications" : {
+            "type" : "boolean"
+          },
+          "privacy" : {
+            "enum" : [ "Public", "Private" ],
+            "type" : "string"
+          }
+        }
+      },
+      "UserVisibility" : {
+        "description" : "Whom to show user profile.",
+        "enum" : [ "Public", "Private" ],
+        "type" : "string"
+      },
+      "UpdateUserSettingsRequest" : {
+        "properties" : {
+          "notifications" : {
+            "type" : "boolean"
+          },
+          "visibility" : {
+            "$ref" : "#/components/schemas/UserVisibility"
+          }
+        }
+      },
+      "UserAnalytics" : {
+        "properties" : {
+          "totalContent" : {
+            "type" : "integer"
+          },
+          "totalViews" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "LoginRequest" : {
+        "properties" : {
+          "email" : {
+            "format" : "email",
+            "type" : "string"
+          },
+          "password" : {
+            "type" : "string"
+          }
+        }
+      },
+      "LoginResponse" : {
+        "properties" : {
+          "accessToken" : {
+            "type" : "string"
+          },
+          "refreshToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "Gender" : {
+        "enum" : [ "Male", "Female", "Transgender" ],
+        "type" : "string"
+      },
+      "RegisterRequest" : {
+        "properties" : {
+          "firstname" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "middlename" : {
+            "type" : "string"
+          },
+          "lastname" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "gender" : {
+            "$ref" : "#/components/schemas/Gender"
+          },
+          "username" : {
+            "readOnly" : true,
+            "type" : "string"
+          },
+          "email" : {
+            "format" : "email",
+            "type" : "string"
+          },
+          "password" : {
+            "format" : "password",
+            "maxLength" : 24,
+            "minLength" : 8,
+            "type" : "string",
+            "writeOnly" : true
+          }
+        },
+        "required" : [ "email", "firstname", "gender", "lastname", "password", "username" ]
+      },
+      "Status" : {
+        "enum" : [ "Success", "Error" ],
+        "type" : "string"
+      },
+      "RegisterResponse" : {
+        "properties" : {
+          "status" : {
+            "$ref" : "#/components/schemas/Status"
+          }
+        }
+      },
+      "RefreshTokenRequest" : {
+        "properties" : {
+          "refreshToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "RefreshTokenResponse" : {
+        "properties" : {
+          "accessToken" : {
+            "type" : "string"
+          },
+          "refreshToken" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ErrorDetails" : {
+        "properties" : {
+          "target" : {
+            "description" : "The target of this specific error i.e. which attribute caused the error.",
+            "example" : "userID",
+            "type" : "string"
+          },
+          "message" : {
+            "description" : "Specific error message for this validation issue i.e. explanation of the error.",
+            "example" : "Must be a valid UUID.",
+            "type" : "string"
+          }
+        },
+        "required" : [ "message", "target" ]
+      },
+      "ErrorResponse" : {
+        "example" : {
+          "code" : 400,
+          "errors" : [ {
+            "message" : "Must be a valid email address.",
+            "target" : "email"
+          }, {
+            "message" : "Must not be empty.",
+            "target" : "password"
+          } ]
+        },
+        "properties" : {
+          "code" : {
+            "description" : "HTTP status code or a custom error code.",
+            "example" : 400,
+            "type" : "integer"
+          },
+          "errors" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ErrorDetails"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "code", "errors" ]
+      },
+      "ForgotPasswordRequest" : {
+        "properties" : {
+          "email" : {
+            "format" : "email",
+            "type" : "string"
+          }
+        }
+      },
+      "ResetPasswordRequest" : {
+        "properties" : {
+          "oldPassword" : {
+            "format" : "password",
+            "type" : "string"
+          },
+          "newPassword" : {
+            "format" : "password",
+            "type" : "string"
+          }
+        },
+        "required" : [ "newPassword", "oldPassword" ]
+      },
+      "ContentID" : {
+        "description" : "ID of the uploaded content",
+        "example" : "acde070d-8c4c-4f0d-9d8a-162843c10333",
+        "type" : "string"
+      },
+      "Platform" : {
+        "description" : "Currently used device",
+        "enum" : [ "Facebook", "LinkedIn", "Twitter", "Instagram", "TikTok", "Reddit", "SnapChat", "YouTube" ],
+        "type" : "string"
+      },
+      "ContentDetails" : {
+        "properties" : {
+          "content_id" : {
+            "$ref" : "#/components/schemas/ContentID"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "platforms" : {
+            "items" : {
+              "$ref" : "#/components/schemas/Platform"
+            },
+            "type" : "array"
+          }
+        }
+      },
+      "ContentListResponse" : {
+        "properties" : {
+          "contents" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ContentDetails"
+            },
+            "type" : "array"
+          }
+        }
+      },
+      "ContentStatus" : {
+        "description" : "Current status of the uploaded content",
+        "enum" : [ "Pending", "Published", "Error", "Deleted", "UnderReview" ],
+        "type" : "string"
+      },
+      "ContentStatusResponse" : {
+        "properties" : {
+          "content_id" : {
+            "$ref" : "#/components/schemas/ContentID"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/ContentStatus"
+          }
+        },
+        "required" : [ "content_id", "status" ]
+      },
+      "CollaborationActionResponse" : {
+        "properties" : {
+          "status" : {
+            "$ref" : "#/components/schemas/Status"
+          },
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AccessType" : {
+        "description" : "Access type for the corresponding content",
+        "enum" : [ "Viewer", "Commenter", "Editor", "Owner" ],
+        "type" : "string"
+      },
+      "UserCollaboration" : {
+        "properties" : {
+          "userID" : {
+            "type" : "string"
+          },
+          "accessType" : {
+            "$ref" : "#/components/schemas/AccessType"
+          }
+        },
+        "required" : [ "accessType", "userID" ]
+      },
+      "CollaborationRequest" : {
+        "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/ContentID"
+          },
+          "users" : {
+            "items" : {
+              "$ref" : "#/components/schemas/UserCollaboration"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "contentID", "users" ]
+      },
+      "ContentAnalytics" : {
+        "properties" : {
+          "views" : {
+            "type" : "integer"
+          },
+          "engagement" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "PlatformSyncRequest" : {
+        "properties" : {
+          "platform" : {
+            "items" : {
+              "$ref" : "#/components/schemas/Platform"
+            },
+            "type" : "array"
+          }
+        }
+      }
+    },
+    "securitySchemes" : {
+      "BearerAuth" : {
+        "bearerFormat" : "JWT",
+        "scheme" : "bearer",
+        "type" : "http"
+      },
+      "APIKey" : {
+        "in" : "header",
+        "name" : "APIKey",
+        "type" : "apiKey"
+      }
+    }
+  }
+}
