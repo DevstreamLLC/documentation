@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"in.devstream.openapi.api"},{"l":"in.devstream.openapi.model"}];updateSearchResults();
