@@ -121,7 +121,7 @@ loadScripts(document, 'script');</script>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /user/profile : Retrieve the current user&#39;s profile information.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a><wbr>&lt;org.springframework.http.ResponseEntity&lt;<a href="../model/UserSettings.html" title="class in in.devstream.openapi.model">UserSettings</a>&gt;&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a><wbr>&lt;org.springframework.http.ResponseEntity&lt;<a href="../model/GetUserSettingsResponse.html" title="class in in.devstream.openapi.model">GetUserSettingsResponse</a>&gt;&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserSettings()" class="member-name-link">getUserSettings</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /user/settings : Retrieve user-specific settings.</div>
@@ -209,15 +209,12 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/user/settings",
                 produces="application/json")
-</span><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;org.springframework.http.ResponseEntity&lt;<a href="../model/UserSettings.html" title="class in in.devstream.openapi.model">UserSettings</a>&gt;&gt;</span>&nbsp;<span class="element-name">getUserSettings</span>()</div>
+</span><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/CompletableFuture.html" title="class or interface in java.util.concurrent" class="external-link">CompletableFuture</a>&lt;org.springframework.http.ResponseEntity&lt;<a href="../model/GetUserSettingsResponse.html" title="class in in.devstream.openapi.model">GetUserSettingsResponse</a>&gt;&gt;</span>&nbsp;<span class="element-name">getUserSettings</span>()</div>
 <div class="block">GET /user/settings : Retrieve user-specific settings.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>Settings retrieved successfully. (status code 200)
-         or Bad request. Invalid request format or parameters. (status code 400)
-         or Unauthorized. Authentication required to view settings. (status code 401)
-         or Not found. User settings do not exist. (status code 404)
-         or Internal server error. Something went wrong on the server. (status code 500)</dd>
+         or Unauthorized. Authentication required to view settings. (status code 401)</dd>
 </dl>
 </section>
 </li>
@@ -257,9 +254,7 @@ loadScripts(document, 'script');</script>
 <dt>Returns:</dt>
 <dd>Settings updated successfully. (status code 200)
          or Bad request. Invalid request format or missing required fields. (status code 400)
-         or Unauthorized. Authentication required to update settings. (status code 401)
-         or Not found. User settings do not exist. (status code 404)
-         or Internal server error. Something went wrong on the server. (status code 500)</dd>
+         or Unauthorized. Authentication required to update settings. (status code 401)</dd>
 </dl>
 </section>
 </li>
