@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.34"
+    "version" : "0.3.35"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -144,23 +144,14 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/UserSettings"
+                  "$ref" : "#/components/schemas/GetUserSettingsResponse"
                 }
               }
             },
             "description" : "Settings retrieved successfully."
           },
-          "400" : {
-            "description" : "Bad request. Invalid request format or parameters."
-          },
           "401" : {
             "description" : "Unauthorized. Authentication required to view settings."
-          },
-          "404" : {
-            "description" : "Not found. User settings do not exist."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
           }
         },
         "security" : [ {
@@ -190,12 +181,6 @@
           },
           "401" : {
             "description" : "Unauthorized. Authentication required to update settings."
-          },
-          "404" : {
-            "description" : "Not found. User settings do not exist."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
           }
         },
         "security" : [ {
@@ -1050,27 +1035,22 @@
         "required" : [ "avatarURL", "email", "userID", "username" ],
         "type" : "object"
       },
-      "UserPrivacy" : {
+      "UserVisibility" : {
         "description" : "Whether a particular user setting or content is available for public viewing or private access. This is again subject to implementation details as without being a social media, only some users can find other users profile. Hence probably it is only for controlling the views of user profile rather than the content user posts.",
         "enum" : [ "Public", "Private" ],
         "type" : "string"
       },
-      "UserSettings" : {
+      "GetUserSettingsResponse" : {
         "properties" : {
           "notifications" : {
             "type" : "boolean"
           },
-          "privacy" : {
-            "$ref" : "#/components/schemas/UserPrivacy"
+          "visibility" : {
+            "$ref" : "#/components/schemas/UserVisibility"
           }
         },
-        "required" : [ "notifications", "privacy" ],
+        "required" : [ "notifications", "visibility" ],
         "type" : "object"
-      },
-      "UserVisibility" : {
-        "description" : "Whom to show user profile.",
-        "enum" : [ "Public", "Private" ],
-        "type" : "string"
       },
       "UpdateUserSettingsRequest" : {
         "properties" : {
