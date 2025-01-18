@@ -119,7 +119,7 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/RegisterResponse.html" title="class in in.devstream.openapi.model">RegisterResponse</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#registerUser(in.devstream.openapi.model.RegisterRequest)" class="member-name-link">registerUser</a><wbr>(@Valid <a href="../model/RegisterRequest.html" title="class in in.devstream.openapi.model">RegisterRequest</a>&nbsp;registerRequest)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">POST /auth/register : Registers a new user.</div>
+<div class="block">POST /auth/register : Registers a new user into the system.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#resetPassword(in.devstream.openapi.model.ForgotPasswordRequest)" class="member-name-link">resetPassword</a><wbr>(@Valid <a href="../model/ForgotPasswordRequest.html" title="class in in.devstream.openapi.model">ForgotPasswordRequest</a>&nbsp;forgotPasswordRequest)</code></div>
@@ -130,6 +130,11 @@ loadScripts(document, 'script');</script>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#resetUserPassword(in.devstream.openapi.model.ResetPasswordRequest)" class="member-name-link">resetUserPassword</a><wbr>(@Valid <a href="../model/ResetPasswordRequest.html" title="class in in.devstream.openapi.model">ResetPasswordRequest</a>&nbsp;resetPasswordRequest)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">POST /auth/reset-password : Reset the user&#39;s password.</div>
+</div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/LoginResponse.html" title="class in in.devstream.openapi.model">LoginResponse</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#twoFactorAuth(in.devstream.openapi.model.TwofactorAuthRequest)" class="member-name-link">twoFactorAuth</a><wbr>(@Valid <a href="../model/TwofactorAuthRequest.html" title="class in in.devstream.openapi.model">TwofactorAuthRequest</a>&nbsp;twofactorAuthRequest)</code></div>
+<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">POST /auth/two-factor-auth : Endpoint to validate OTP for two factor authentication.</div>
 </div>
 </div>
 </div>
@@ -198,15 +203,14 @@ loadScripts(document, 'script');</script>
                 consumes="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/RegisterResponse.html" title="class in in.devstream.openapi.model">RegisterResponse</a>&gt;</span>&nbsp;<span class="element-name">registerUser</span><wbr><span class="parameters">(@Valid @RequestBody
  @Valid <a href="../model/RegisterRequest.html" title="class in in.devstream.openapi.model">RegisterRequest</a>&nbsp;registerRequest)</span></div>
-<div class="block">POST /auth/register : Registers a new user.</div>
+<div class="block">POST /auth/register : Registers a new user into the system.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
 <dd><code>registerRequest</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>Registration successful. (status code 201)
          or Bad request. The input is invalid or missing required fields. (status code 400)
-         or Conflict. A user with the provided details already exists. (status code 409)
-         or Too many requests. Rate limit exceeded. (status code 429)</dd>
+         or Conflict. A user with the provided details already exists. (status code 409)</dd>
 </dl>
 </section>
 </li>
@@ -254,6 +258,27 @@ loadScripts(document, 'script');</script>
          or Forbidden. The user does not have permission to reset the password. (status code 403)
          or Not found. The user does not exist in the system. (status code 404)
          or Too many requests. Rate limit exceeded. (status code 429)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="twoFactorAuth(in.devstream.openapi.model.TwofactorAuthRequest)">
+<h3>twoFactorAuth</h3>
+<div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
+                value="/auth/two-factor-auth",
+                produces="application/json",
+                consumes="application/json")
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/LoginResponse.html" title="class in in.devstream.openapi.model">LoginResponse</a>&gt;</span>&nbsp;<span class="element-name">twoFactorAuth</span><wbr><span class="parameters">(@Valid @RequestBody
+ @Valid <a href="../model/TwofactorAuthRequest.html" title="class in in.devstream.openapi.model">TwofactorAuthRequest</a>&nbsp;twofactorAuthRequest)</span></div>
+<div class="block">POST /auth/two-factor-auth : Endpoint to validate OTP for two factor authentication.
+ This is to validate the OTP generated if two factor authentication is enabled. The login ID must be tagged along with the OTP to map which login attempt this OTP belongs to.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>twofactorAuthRequest</code> - (required)</dd>
+<dt>Returns:</dt>
+<dd>OTP is valid for the given login ID. Hence user is authenticated and both access and refresh tokens are granted. (status code 200)
+         or Bad request. Either OTP or login ID or both are missing. (status code 400)
+         or Unauthorized. The OTP does not match with the one generated for this login ID or invalid OTP is provided. (status code 401)</dd>
 </dl>
 </section>
 </li>

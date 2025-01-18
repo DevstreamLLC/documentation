@@ -262,10 +262,6 @@ loadScripts(document, 'script');</script>
 <h4>Serialized Fields</h4>
 <ul class="block-list">
 <li class="block-list">
-<h5>code</h5>
-<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a> code</pre>
-</li>
-<li class="block-list">
 <h5>errors</h5>
 <pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/ErrorDetails.html" title="class in in.devstream.openapi.model">ErrorDetails</a>&gt; errors</pre>
 </li>
@@ -398,11 +394,23 @@ loadScripts(document, 'script');</script>
 <ul class="block-list">
 <li class="block-list">
 <h5>accessToken</h5>
-<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> accessToken</pre>
+<pre>byte[] accessToken</pre>
+</li>
+<li class="block-list">
+<h5>loginAttemptID</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> loginAttemptID</pre>
+</li>
+<li class="block-list">
+<h5>loginAttemptTimeStamp</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" title="class or interface in java.time" class="external-link">OffsetDateTime</a> loginAttemptTimeStamp</pre>
 </li>
 <li class="block-list">
 <h5>refreshToken</h5>
-<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> refreshToken</pre>
+<pre>byte[] refreshToken</pre>
+</li>
+<li class="block-list">
+<h5>requiresTwoFactorAuth</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a> requiresTwoFactorAuth</pre>
 </li>
 </ul>
 </section>
@@ -497,6 +505,10 @@ loadScripts(document, 'script');</script>
 <h4>Serialized Fields</h4>
 <ul class="block-list">
 <li class="block-list">
+<h5>dateOfBirth</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a> dateOfBirth</pre>
+</li>
+<li class="block-list">
 <h5>email</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> email</pre>
 </li>
@@ -517,8 +529,16 @@ loadScripts(document, 'script');</script>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt; middlename</pre>
 </li>
 <li class="block-list">
+<h5>mobileNumber</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> mobileNumber</pre>
+</li>
+<li class="block-list">
 <h5>password</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> password</pre>
+</li>
+<li class="block-list">
+<h5>twoFactorAuthentication</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&gt; twoFactorAuthentication</pre>
 </li>
 <li class="block-list">
 <h5>username</h5>
@@ -573,6 +593,33 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>oldPassword</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> oldPassword</pre>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<li>
+<section class="serialized-class-details" id="in.devstream.openapi.model.TwofactorAuthRequest">
+<h3>Class&nbsp;<a href="in/devstream/openapi/model/TwofactorAuthRequest.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.TwofactorAuthRequest</a></h3>
+<div class="type-signature">class TwofactorAuthRequest extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<dl class="name-value">
+<dt>serialVersionUID:</dt>
+<dd>1L</dd>
+</dl>
+<ul class="block-list">
+<li>
+<section class="detail">
+<h4>Serialized Fields</h4>
+<ul class="block-list">
+<li class="block-list">
+<h5>loginAttemptID</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt; loginAttemptID</pre>
+</li>
+<li class="block-list">
+<h5>oneTimePassword</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Integer.html" title="class or interface in java.lang" class="external-link">Integer</a>&gt; oneTimePassword</pre>
 </li>
 </ul>
 </section>
