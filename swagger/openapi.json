@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.36"
+    "version" : "0.3.37"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -294,6 +294,57 @@
         "tags" : [ "Auth" ]
       }
     },
+    "/auth/two-factor-auth" : {
+      "post" : {
+        "description" : "This is to validate the OTP generated if two factor authentication is enabled. The login ID must be tagged along with the OTP to map which login attempt this OTP belongs to.",
+        "operationId" : "two-factor-auth",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TwofactorAuthRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/LoginResponse"
+                }
+              }
+            },
+            "description" : "OTP is valid for the given login ID. Hence user is authenticated and both access and refresh tokens are granted."
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description" : "Bad request. Either OTP or login ID or both are missing."
+          },
+          "401" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description" : "Unauthorized. The OTP does not match with the one generated for this login ID or invalid OTP is provided."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Endpoint to validate OTP for two factor authentication.",
+        "tags" : [ "Auth" ]
+      }
+    },
     "/auth/register" : {
       "post" : {
         "operationId" : "register-user",
@@ -319,17 +370,28 @@
             "description" : "Registration successful."
           },
           "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
             "description" : "Bad request. The input is invalid or missing required fields."
           },
           "409" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
             "description" : "Conflict. A user with the provided details already exists."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
           }
         },
         "security" : [ ],
-        "summary" : "Registers a new user.",
+        "summary" : "Registers a new user into the system.",
         "tags" : [ "Auth" ]
       }
     },
@@ -1094,15 +1156,81 @@
         "type" : "object"
       },
       "LoginResponse" : {
+        "description" : "Check if requiresTwoFactorAuth is true, then use ID and generated OTP to send another request to get authentication tokens. If two factor authentication is set to false, directly access the tokens from the object.",
         "properties" : {
+          "requiresTwoFactorAuth" : {
+            "description" : "Whether two factor authentication is on or off. If true, accessToken and refreshToken needs to be set empty string. If false, only then the tokens contain meaningful information.",
+            "type" : "boolean"
+          },
+          "loginAttemptID" : {
+            "description" : "This is to keep track of which login attempt will be validated using the two factor authentication OTP.",
+            "type" : "string"
+          },
+          "loginAttemptTimeStamp" : {
+            "format" : "date-time",
+            "type" : "string"
+          },
           "accessToken" : {
+            "default" : "",
+            "format" : "byte",
             "type" : "string"
           },
           "refreshToken" : {
+            "default" : "",
+            "format" : "byte",
             "type" : "string"
           }
         },
-        "required" : [ "accessToken", "refreshToken" ],
+        "required" : [ "accessToken", "loginAttemptID", "loginAttemptTimeStamp", "refreshToken", "requiresTwoFactorAuth" ],
+        "type" : "object"
+      },
+      "TwofactorAuthRequest" : {
+        "description" : "Contains a pair of login attempt ID and it's corresponding OTP.",
+        "properties" : {
+          "loginAttemptID" : {
+            "type" : "string"
+          },
+          "oneTimePassword" : {
+            "type" : "integer"
+          }
+        },
+        "type" : "object"
+      },
+      "ErrorDetails" : {
+        "properties" : {
+          "target" : {
+            "description" : "The target of this specific error i.e. which attribute caused the error.",
+            "example" : "userID",
+            "type" : "string"
+          },
+          "message" : {
+            "description" : "Specific error message for this validation issue i.e. explanation of the error.",
+            "example" : "Must be a valid UUID.",
+            "type" : "string"
+          }
+        },
+        "required" : [ "message", "target" ],
+        "type" : "object"
+      },
+      "ErrorResponse" : {
+        "example" : {
+          "errors" : [ {
+            "message" : "Must be a valid email address.",
+            "target" : "email"
+          }, {
+            "message" : "Must not be empty.",
+            "target" : "password"
+          } ]
+        },
+        "properties" : {
+          "errors" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ErrorDetails"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "errors" ],
         "type" : "object"
       },
       "Gender" : {
@@ -1125,7 +1253,13 @@
           "gender" : {
             "$ref" : "#/components/schemas/Gender"
           },
+          "dateOfBirth" : {
+            "format" : "date",
+            "type" : "string"
+          },
           "username" : {
+            "maxLength" : 24,
+            "minLength" : 4,
             "readOnly" : true,
             "type" : "string"
           },
@@ -1139,9 +1273,18 @@
             "minLength" : 8,
             "type" : "string",
             "writeOnly" : true
+          },
+          "twoFactorAuthentication" : {
+            "default" : true,
+            "description" : "Whether two factor authentication hould be used or not.",
+            "type" : "boolean"
+          },
+          "mobileNumber" : {
+            "pattern" : "^[+]{1}(?:[0-9\\-\\(\\)\\/\\.]\\s?){6, 15}[0-9]{1}$",
+            "type" : "string"
           }
         },
-        "required" : [ "email", "firstname", "gender", "lastname", "password", "username" ],
+        "required" : [ "dateOfBirth", "email", "firstname", "gender", "lastname", "mobileNumber", "password", "username" ],
         "type" : "object"
       },
       "Status" : {
@@ -1177,49 +1320,6 @@
           }
         },
         "required" : [ "accessToken", "refreshToken" ],
-        "type" : "object"
-      },
-      "ErrorDetails" : {
-        "properties" : {
-          "target" : {
-            "description" : "The target of this specific error i.e. which attribute caused the error.",
-            "example" : "userID",
-            "type" : "string"
-          },
-          "message" : {
-            "description" : "Specific error message for this validation issue i.e. explanation of the error.",
-            "example" : "Must be a valid UUID.",
-            "type" : "string"
-          }
-        },
-        "required" : [ "message", "target" ],
-        "type" : "object"
-      },
-      "ErrorResponse" : {
-        "example" : {
-          "code" : 400,
-          "errors" : [ {
-            "message" : "Must be a valid email address.",
-            "target" : "email"
-          }, {
-            "message" : "Must not be empty.",
-            "target" : "password"
-          } ]
-        },
-        "properties" : {
-          "code" : {
-            "description" : "HTTP status code or a custom error code.",
-            "example" : 400,
-            "type" : "integer"
-          },
-          "errors" : {
-            "items" : {
-              "$ref" : "#/components/schemas/ErrorDetails"
-            },
-            "type" : "array"
-          }
-        },
-        "required" : [ "code", "errors" ],
         "type" : "object"
       },
       "ForgotPasswordRequest" : {
