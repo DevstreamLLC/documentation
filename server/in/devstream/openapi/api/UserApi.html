@@ -107,9 +107,9 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteUserProfile(java.lang.String)" class="member-name-link">deleteUserProfile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userId)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteUserProfile(java.lang.String)" class="member-name-link">deleteUserProfile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userID)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">DELETE /user/{user_id} : Deletes user profile.</div>
+<div class="block">DELETE /user/{UserID} : Deletes user profile.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/UserAnalytics.html" title="class in in.devstream.openapi.model">UserAnalytics</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserAnalytics()" class="member-name-link">getUserAnalytics</a>()</code></div>
@@ -154,13 +154,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="deleteUserProfile(java.lang.String)">
 <h3>deleteUserProfile</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=DELETE,
-                value="/user/{user_id}")
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">deleteUserProfile</span><wbr><span class="parameters">(@PathVariable("user_id")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userId)</span></div>
-<div class="block">DELETE /user/{user_id} : Deletes user profile.</div>
+                value="/user/{UserID}")
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">deleteUserProfile</span><wbr><span class="parameters">(@PathVariable("UserID")
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userID)</span></div>
+<div class="block">DELETE /user/{UserID} : Deletes user profile.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>userId</code> - (required)</dd>
+<dd><code>userID</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>User deleted successfully. (status code 200)
          or User with given ID not found. (status code 404)</dd>
