@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.37"
+    "version" : "0.3.39"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -38,6 +38,9 @@
   }, {
     "description" : "Endpoints for managing user information (profile, settings, analytics).",
     "name" : "User"
+  }, {
+    "description" : "Endpoints to deal with user content publishing pipeline.",
+    "name" : "Pipeline"
   } ],
   "paths" : {
     "/health" : {
@@ -224,13 +227,13 @@
         "tags" : [ "User" ]
       }
     },
-    "/user/{user_id}" : {
+    "/user/{UserID}" : {
       "delete" : {
         "operationId" : "delete-user-profile",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "user_id",
+          "name" : "UserID",
           "required" : true,
           "schema" : {
             "type" : "string"
@@ -597,12 +600,6 @@
           },
           "404" : {
             "description" : "No content found for the given filters."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
-          },
-          "503" : {
-            "description" : "Service unavailable. The system is under maintenance or overloaded."
           }
         },
         "security" : [ {
@@ -610,15 +607,39 @@
         } ],
         "summary" : "List all user content with optional filters.",
         "tags" : [ "Content" ]
+      },
+      "post" : {
+        "description" : "On successful completion of this request, the response contents a pre signed url in which the user needs to upload the content. On successful completion of document update, it's responsibility of the document uploading server to notify the application server that the content has been uploaded.",
+        "operationId" : "publish-content",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PreSignedURLResponse"
+                }
+              }
+            },
+            "description" : "Contents the generated pre signed URL, on which the client has to upload the content."
+          },
+          "400" : {
+            "description" : "Invalid parameters for getting presigned URL."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Publish content for the user.",
+        "tags" : [ "Content" ]
       }
     },
-    "/content/{content_id}" : {
+    "/content/{ContentID}" : {
       "delete" : {
         "operationId" : "delete-content",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "content_id",
+          "name" : "ContentID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/ContentID"
@@ -656,7 +677,7 @@
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "content_id",
+          "name" : "ContentID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/ContentID"
@@ -697,13 +718,13 @@
         "tags" : [ "Content" ]
       }
     },
-    "/content/status/{content_id}" : {
+    "/content/status/{ContentID}" : {
       "get" : {
         "operationId" : "get-content-status",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "content_id",
+          "name" : "ContentID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/ContentID"
@@ -715,7 +736,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ContentStatusResponse"
+                  "$ref" : "#/components/schemas/get_content_status_200_response"
                 }
               }
             },
@@ -726,12 +747,6 @@
           },
           "404" : {
             "description" : "Content not found. The specified content ID does not exist."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
-          },
-          "503" : {
-            "description" : "Service unavailable. The system is under maintenance or overloaded."
           }
         },
         "security" : [ {
@@ -739,15 +754,51 @@
         } ],
         "summary" : "Check the status of a specific piece of content.",
         "tags" : [ "Content" ]
+      },
+      "patch" : {
+        "operationId" : "change-content-status-for-id",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "ContentID",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/ContentID"
+          },
+          "style" : "simple"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/UpdateContentStatusRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Content status updated successfuly."
+          },
+          "404" : {
+            "description" : "Could not find content with specified ID."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Changes content status for a particular content.",
+        "tags" : [ "Content" ]
       }
     },
-    "/content/invite/{content_id}" : {
+    "/content/invite/{ContentID}" : {
       "get" : {
         "operationId" : "get-pending-invitations",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "content_id",
+          "name" : "ContentID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/ContentID"
@@ -784,7 +835,7 @@
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "content_id",
+          "name" : "ContentID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/ContentID"
@@ -826,7 +877,7 @@
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "content_id",
+          "name" : "ContentID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/ContentID"
@@ -864,13 +915,13 @@
         "tags" : [ "Content" ]
       }
     },
-    "/content/analytics/{content_id}" : {
+    "/content/analytics/{ContentID}" : {
       "get" : {
         "operationId" : "get-content-analytics",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "content_id",
+          "name" : "ContentID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/ContentID"
@@ -911,13 +962,45 @@
         "tags" : [ "Content" ]
       }
     },
-    "/platforms/{platform_id}" : {
+    "/content/upload-finish/{ContentID}" : {
+      "get" : {
+        "description" : "After the upload has been finished in the object storage, the storage server will ping this endpoint with the content id. This endpoint will change the status of the content from uploading to processing and then further process the content stored in the object store.\nNote that this endpoint also changes the status of the content.",
+        "operationId" : "content-upload-finished",
+        "parameters" : [ {
+          "explode" : false,
+          "in" : "path",
+          "name" : "ContentID",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/components/schemas/ContentID"
+          },
+          "style" : "simple"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Content status successfully changed."
+          },
+          "400" : {
+            "description" : "In case the previous status of the content is not uploading, this endpoint will not change the status to processing and will not do any task on the content."
+          },
+          "404" : {
+            "description" : "The specified content ID does not exist."
+          }
+        },
+        "security" : [ {
+          "ApiKeyAuth" : [ ]
+        } ],
+        "summary" : "Handle content processing after upload finishes.",
+        "tags" : [ "Content" ]
+      }
+    },
+    "/platforms/{PlatformID}" : {
       "delete" : {
         "operationId" : "disconnect-platform",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "platform_id",
+          "name" : "PlatformID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/Platform"
@@ -952,7 +1035,7 @@
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
-          "name" : "platform_id",
+          "name" : "PlatformID",
           "required" : true,
           "schema" : {
             "$ref" : "#/components/schemas/Platform"
@@ -1022,6 +1105,58 @@
         "summary" : "Sync content from external platforms.",
         "tags" : [ "Platforms" ]
       }
+    },
+    "/pipeline" : {
+      "get" : {
+        "description" : "Get pipelines saved for a particular user. Todo is to decide whether prebuild pipelines are also send alongside user pipelines in this.",
+        "operationId" : "get-pipelines-for-user",
+        "responses" : {
+          "200" : {
+            "description" : "All pipelines defined by a particular user as well as predefined common pipelines."
+          },
+          "400" : {
+            "description" : "No predefined or saved pipeline found."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Gets all the pipelines created by the user as well as predefined pipelines.",
+        "tags" : [ "Preference" ]
+      },
+      "post" : {
+        "operationId" : "create-pipeline-specification",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/CreatePipelineRequest"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CreatePipelineResponse"
+                }
+              }
+            },
+            "description" : "Pipeline specification created successfully."
+          },
+          "400" : {
+            "description" : "Bad Request, invalid inputs."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Creates a new user specification for content processing pipeline.",
+        "tags" : [ "Preference" ]
+      }
     }
   },
   "components" : {
@@ -1029,7 +1164,7 @@
       "UserIDParam" : {
         "explode" : false,
         "in" : "path",
-        "name" : "user_id",
+        "name" : "UserID",
         "required" : true,
         "schema" : {
           "type" : "string"
@@ -1039,7 +1174,7 @@
       "ContentIDParam" : {
         "explode" : false,
         "in" : "path",
-        "name" : "content_id",
+        "name" : "ContentID",
         "required" : true,
         "schema" : {
           "$ref" : "#/components/schemas/ContentID"
@@ -1049,7 +1184,7 @@
       "PlatformIDParam" : {
         "explode" : false,
         "in" : "path",
-        "name" : "platform_id",
+        "name" : "PlatformID",
         "required" : true,
         "schema" : {
           "$ref" : "#/components/schemas/Platform"
@@ -1171,12 +1306,10 @@
             "type" : "string"
           },
           "accessToken" : {
-            "default" : "",
             "format" : "byte",
             "type" : "string"
           },
           "refreshToken" : {
-            "default" : "",
             "format" : "byte",
             "type" : "string"
           }
@@ -1392,21 +1525,33 @@
         "required" : [ "contents" ],
         "type" : "object"
       },
-      "ContentStatus" : {
-        "description" : "Current status of the uploaded content",
-        "enum" : [ "Pending", "Published", "Error", "Deleted", "UnderReview" ],
-        "type" : "string"
-      },
-      "ContentStatusResponse" : {
+      "PreSignedURLResponse" : {
         "properties" : {
           "contentID" : {
             "$ref" : "#/components/schemas/ContentID"
           },
-          "status" : {
+          "preSignedURL" : {
+            "description" : "Presigned URL to upload the content with specified ID into the object storage.",
+            "format" : "uri",
+            "type" : "string"
+          }
+        },
+        "required" : [ "contentID", "preSignedURL" ],
+        "type" : "object"
+      },
+      "ContentStatus" : {
+        "description" : "Current status of the uploaded content",
+        "enum" : [ "Uploading", "Processing", "Published", "Failed", "Deleted", "UnderReview" ],
+        "type" : "string"
+      },
+      "UpdateContentStatusRequest" : {
+        "description" : "Changes the status of the content with given ID.",
+        "properties" : {
+          "updatedStatus" : {
             "$ref" : "#/components/schemas/ContentStatus"
           }
         },
-        "required" : [ "contentID", "status" ],
+        "required" : [ "updatedStatus" ],
         "type" : "object"
       },
       "CollaborationActionResponse" : {
@@ -1477,6 +1622,70 @@
         },
         "required" : [ "platform" ],
         "type" : "object"
+      },
+      "PipelineStep" : {
+        "enum" : [ 0, 1, 2, 3, 4 ],
+        "type" : "integer",
+        "x-enum-varnames" : [ "ClosedCaptionGeneration", "HashtagsGeneration", "DescriptionGeneration", "VoiceoverGeneration", "SoundTrackGeneration" ],
+        "x-enum-descriptions" : [ "Description ClosedCaptionGeneration", "Description HashtagsGeneration", "Description DescriptionGeneration", "Description VoiceoverGeneration", "Description SoundTrackGeneration" ]
+      },
+      "ContentPipeline" : {
+        "properties" : {
+          "platform" : {
+            "$ref" : "#/components/schemas/Platform"
+          },
+          "steps" : {
+            "items" : {
+              "$ref" : "#/components/schemas/PipelineStep"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "platform", "steps" ],
+        "type" : "object"
+      },
+      "CreatePipelineRequest" : {
+        "properties" : {
+          "isTemporary" : {
+            "default" : true,
+            "description" : "Whether to store the pipeline under user account.",
+            "type" : "boolean"
+          },
+          "pipelineName" : {
+            "description" : "Name with which the pipeline will be saved under user account. If not provided, a random name will be generated.",
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "pipeline" : {
+            "items" : {
+              "$ref" : "#/components/schemas/ContentPipeline"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "isTemporary", "pipeline" ],
+        "type" : "object"
+      },
+      "CreatePipelineResponse" : {
+        "description" : "Response after a particular pipeline is saved in persisting storage. The pipeline can either be saved under a particular user account or as a temporary pipeline specification for processing a single content.",
+        "properties" : {
+          "pipelineID" : {
+            "description" : "ID to uniquely identify the saved pipeline.",
+            "format" : "uuid",
+            "type" : "string"
+          }
+        },
+        "required" : [ "pipelineID" ],
+        "type" : "object"
+      },
+      "get_content_status_200_response" : {
+        "properties" : {
+          "status" : {
+            "$ref" : "#/components/schemas/ContentStatus"
+          }
+        },
+        "required" : [ "status" ],
+        "type" : "object"
       }
     },
     "securitySchemes" : {
@@ -1485,9 +1694,9 @@
         "scheme" : "bearer",
         "type" : "http"
       },
-      "APIKey" : {
+      "ApiKeyAuth" : {
         "in" : "header",
-        "name" : "APIKey",
+        "name" : "x-api-key",
         "type" : "apiKey"
       }
     }
