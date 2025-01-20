@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.39"
+    "version" : "0.3.40"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -1122,7 +1122,7 @@
           "BearerAuth" : [ ]
         } ],
         "summary" : "Gets all the pipelines created by the user as well as predefined pipelines.",
-        "tags" : [ "Preference" ]
+        "tags" : [ "Pipeline" ]
       },
       "post" : {
         "operationId" : "create-pipeline-specification",
@@ -1155,7 +1155,7 @@
           "BearerAuth" : [ ]
         } ],
         "summary" : "Creates a new user specification for content processing pipeline.",
-        "tags" : [ "Preference" ]
+        "tags" : [ "Pipeline" ]
       }
     }
   },
