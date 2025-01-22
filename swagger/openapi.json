@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.44"
+    "version" : "0.3.46"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -280,7 +280,7 @@
           "BearerAuth" : [ ]
         } ],
         "summary" : "List all user content with optional filters.",
-        "tags" : [ "Content" ]
+        "tags" : [ "User" ]
       },
       "post" : {
         "description" : "On successful completion of this request, the response contents a pre signed url in which the user needs to upload the content. On successful completion of document update, it's responsibility of the document uploading server to notify the application server that the content has been uploaded.",
@@ -304,7 +304,7 @@
           "BearerAuth" : [ ]
         } ],
         "summary" : "Publish content for the user.",
-        "tags" : [ "Content" ]
+        "tags" : [ "User" ]
       }
     },
     "/user/password" : {
@@ -530,7 +530,7 @@
     },
     "/auth/revalidate" : {
       "post" : {
-        "description" : "This endpoint is used to revalidate the authentication token given the refresh token of the user. This endpoint returns a new valid authentication token. Without refresh token, this endpoint will not create a new authentication token. For getting an authentication token without refresh token, try [logging in](/auth/login).",
+        "description" : "This endpoint is used to revalidate the authentication token given the refresh token of the user. This endpoint returns a new valid authentication token. Without refresh token, this endpoint will not create a new authentication token. For getting an authentication token without refresh token, try logging in instead.",
         "operationId" : "auth-revalidate",
         "requestBody" : {
           "content" : {
