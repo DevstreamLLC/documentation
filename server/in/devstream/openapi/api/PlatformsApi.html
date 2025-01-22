@@ -107,17 +107,17 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#connectPlatform(in.devstream.openapi.model.Platform)" class="member-name-link">connectPlatform</a><wbr>(<a href="../model/Platform.html" title="enum class in in.devstream.openapi.model">Platform</a>&nbsp;platformID)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#connectPlatform(in.devstream.openapi.model.TypeSupportedPlatform)" class="member-name-link">connectPlatform</a><wbr>(<a href="../model/TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a>&nbsp;platformID)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">POST /platforms/{PlatformID} : Connect a new platform.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#disconnectPlatform(in.devstream.openapi.model.Platform)" class="member-name-link">disconnectPlatform</a><wbr>(<a href="../model/Platform.html" title="enum class in in.devstream.openapi.model">Platform</a>&nbsp;platformID)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#disconnectPlatform(in.devstream.openapi.model.TypeSupportedPlatform)" class="member-name-link">disconnectPlatform</a><wbr>(<a href="../model/TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a>&nbsp;platformID)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">DELETE /platforms/{PlatformID} : Disconnect an existing platform.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#syncAllExternalPlatforms(in.devstream.openapi.model.PlatformSyncRequest)" class="member-name-link">syncAllExternalPlatforms</a><wbr>(@Valid <a href="../model/PlatformSyncRequest.html" title="class in in.devstream.openapi.model">PlatformSyncRequest</a>&nbsp;platformSyncRequest)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#syncAllExternalPlatforms(in.devstream.openapi.model.RequestPlatformSync)" class="member-name-link">syncAllExternalPlatforms</a><wbr>(@Valid <a href="../model/RequestPlatformSync.html" title="class in in.devstream.openapi.model">RequestPlatformSync</a>&nbsp;requestPlatformSync)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">POST /platforms/sync : Sync content from external platforms.</div>
 </div>
@@ -136,12 +136,12 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="connectPlatform(in.devstream.openapi.model.Platform)">
+<section class="detail" id="connectPlatform(in.devstream.openapi.model.TypeSupportedPlatform)">
 <h3>connectPlatform</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
                 value="/platforms/{PlatformID}")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">connectPlatform</span><wbr><span class="parameters">(@PathVariable("PlatformID")
- <a href="../model/Platform.html" title="enum class in in.devstream.openapi.model">Platform</a>&nbsp;platformID)</span></div>
+ <a href="../model/TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a>&nbsp;platformID)</span></div>
 <div class="block">POST /platforms/{PlatformID} : Connect a new platform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -150,18 +150,17 @@ loadScripts(document, 'script');</script>
 <dd>Platform connected successfully. (status code 200)
          or Bad request. Invalid platform ID or missing parameters. (status code 400)
          or Forbidden. The user does not have permission to connect the platform. (status code 403)
-         or Not found. The platform does not exist. (status code 404)
-         or Internal server error. Something went wrong on the server. (status code 500)</dd>
+         or Not found. The platform does not exist. (status code 404)</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="disconnectPlatform(in.devstream.openapi.model.Platform)">
+<section class="detail" id="disconnectPlatform(in.devstream.openapi.model.TypeSupportedPlatform)">
 <h3>disconnectPlatform</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=DELETE,
                 value="/platforms/{PlatformID}")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">disconnectPlatform</span><wbr><span class="parameters">(@PathVariable("PlatformID")
- <a href="../model/Platform.html" title="enum class in in.devstream.openapi.model">Platform</a>&nbsp;platformID)</span></div>
+ <a href="../model/TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a>&nbsp;platformID)</span></div>
 <div class="block">DELETE /platforms/{PlatformID} : Disconnect an existing platform.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -170,30 +169,28 @@ loadScripts(document, 'script');</script>
 <dd>Platform disconnected successfully. (status code 200)
          or Bad request. Invalid platform ID or missing parameters. (status code 400)
          or Forbidden. The user does not have permission to disconnect the platform. (status code 403)
-         or Not found. The platform does not exist. (status code 404)
-         or Internal server error. Something went wrong on the server. (status code 500)</dd>
+         or Not found. The platform does not exist. (status code 404)</dd>
 </dl>
 </section>
 </li>
 <li>
-<section class="detail" id="syncAllExternalPlatforms(in.devstream.openapi.model.PlatformSyncRequest)">
+<section class="detail" id="syncAllExternalPlatforms(in.devstream.openapi.model.RequestPlatformSync)">
 <h3>syncAllExternalPlatforms</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
                 value="/platforms/sync",
                 consumes="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">syncAllExternalPlatforms</span><wbr><span class="parameters">(@Valid @RequestBody
- @Valid <a href="../model/PlatformSyncRequest.html" title="class in in.devstream.openapi.model">PlatformSyncRequest</a>&nbsp;platformSyncRequest)</span></div>
+ @Valid <a href="../model/RequestPlatformSync.html" title="class in in.devstream.openapi.model">RequestPlatformSync</a>&nbsp;requestPlatformSync)</span></div>
 <div class="block">POST /platforms/sync : Sync content from external platforms.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>platformSyncRequest</code> - (required)</dd>
+<dd><code>requestPlatformSync</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>Platform sync initiated successfully. (status code 200)
          or Bad request. Invalid sync request or missing parameters. (status code 400)
          or Unauthorized. Authentication required to sync content. (status code 401)
          or Forbidden. The user does not have permission to sync content. (status code 403)
-         or Not found. The specified platform could not be found. (status code 404)
-         or Internal server error. Something went wrong on the server. (status code 500)</dd>
+         or Not found. The specified platform could not be found. (status code 404)</dd>
 </dl>
 </section>
 </li>

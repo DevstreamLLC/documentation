@@ -107,33 +107,39 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteUserProfile(java.lang.String)" class="member-name-link">deleteUserProfile</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userID)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deactivateUserAccount()" class="member-name-link">deactivateUserAccount</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">DELETE /user/{UserID} : Deletes user profile.</div>
+<div class="block">DELETE /user/deactivate : Deactivates the current user account.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/UserAnalytics.html" title="class in in.devstream.openapi.model">UserAnalytics</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetUserAnalytics.html" title="class in in.devstream.openapi.model">ResponseGetUserAnalytics</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserAnalytics()" class="member-name-link">getUserAnalytics</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /user/analytics : View overall analytics for the user.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/UserProfile.html" title="class in in.devstream.openapi.model">UserProfile</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetUserProfile.html" title="class in in.devstream.openapi.model">ResponseGetUserProfile</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserProfileInformation()" class="member-name-link">getUserProfileInformation</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /user/profile : Retrieve the current user&#39;s profile information.</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/GetUserSettingsResponse.html" title="class in in.devstream.openapi.model">GetUserSettingsResponse</a>&gt;</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetUserSettings.html" title="class in in.devstream.openapi.model">ResponseGetUserSettings</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserSettings()" class="member-name-link">getUserSettings</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /user/settings : Retrieve user-specific settings.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateUserProfileInformation(in.devstream.openapi.model.UserProfile)" class="member-name-link">updateUserProfileInformation</a><wbr>(@Valid <a href="../model/UserProfile.html" title="class in in.devstream.openapi.model">UserProfile</a>&nbsp;userProfile)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateUserPassword(java.lang.String,java.lang.String)" class="member-name-link">updateUserPassword</a><wbr>(@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldPassword,
+ @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newPassword)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">PATCH /user/profile : Update user profile details.</div>
+<div class="block">PATCH /user/password : Let&#39;s the user change their password with the help of old password.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateUserSettings(in.devstream.openapi.model.UpdateUserSettingsRequest)" class="member-name-link">updateUserSettings</a><wbr>(@Valid <a href="../model/UpdateUserSettingsRequest.html" title="class in in.devstream.openapi.model">UpdateUserSettingsRequest</a>&nbsp;updateUserSettingsRequest)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateUserProfileInformation(in.devstream.openapi.model.RequestUpdateUserProfile)" class="member-name-link">updateUserProfileInformation</a><wbr>(@Valid <a href="../model/RequestUpdateUserProfile.html" title="class in in.devstream.openapi.model">RequestUpdateUserProfile</a>&nbsp;requestUpdateUserProfile)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
+<div class="block">PATCH /user/profile : Update user profile details.</div>
+</div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateUserSettings(in.devstream.openapi.model.RequestUpdateUserSettings)" class="member-name-link">updateUserSettings</a><wbr>(@Valid <a href="../model/RequestUpdateUserSettings.html" title="class in in.devstream.openapi.model">RequestUpdateUserSettings</a>&nbsp;requestUpdateUserSettings)</code></div>
+<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">PATCH /user/settings : Update user-specific settings.</div>
 </div>
 </div>
@@ -151,16 +157,13 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="deleteUserProfile(java.lang.String)">
-<h3>deleteUserProfile</h3>
+<section class="detail" id="deactivateUserAccount()">
+<h3>deactivateUserAccount</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=DELETE,
-                value="/user/{UserID}")
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">deleteUserProfile</span><wbr><span class="parameters">(@PathVariable("UserID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;userID)</span></div>
-<div class="block">DELETE /user/{UserID} : Deletes user profile.</div>
+                value="/user/deactivate")
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">deactivateUserAccount</span>()</div>
+<div class="block">DELETE /user/deactivate : Deactivates the current user account.</div>
 <dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>userID</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>User deleted successfully. (status code 200)
          or User with given ID not found. (status code 404)</dd>
@@ -173,15 +176,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/user/analytics",
                 produces="application/json")
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/UserAnalytics.html" title="class in in.devstream.openapi.model">UserAnalytics</a>&gt;</span>&nbsp;<span class="element-name">getUserAnalytics</span>()</div>
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseGetUserAnalytics.html" title="class in in.devstream.openapi.model">ResponseGetUserAnalytics</a>&gt;</span>&nbsp;<span class="element-name">getUserAnalytics</span>()</div>
 <div class="block">GET /user/analytics : View overall analytics for the user.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>User analytics retrieved successfully. (status code 200)
          or Bad request. Invalid request format or parameters. (status code 400)
          or Unauthorized. Authentication required to view analytics. (status code 401)
-         or Not found. User analytics data does not exist. (status code 404)
-         or Internal server error. Something went wrong on the server. (status code 500)</dd>
+         or Not found. User analytics data does not exist. (status code 404)</dd>
 </dl>
 </section>
 </li>
@@ -191,15 +193,14 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/user/profile",
                 produces="application/json")
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/UserProfile.html" title="class in in.devstream.openapi.model">UserProfile</a>&gt;</span>&nbsp;<span class="element-name">getUserProfileInformation</span>()</div>
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseGetUserProfile.html" title="class in in.devstream.openapi.model">ResponseGetUserProfile</a>&gt;</span>&nbsp;<span class="element-name">getUserProfileInformation</span>()</div>
 <div class="block">GET /user/profile : Retrieve the current user&#39;s profile information.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>User profile retrieved successfully. (status code 200)
          or Bad request. Invalid request format or parameters. (status code 400)
          or Unauthorized. Authentication required to view the profile. (status code 401)
-         or Not found. User profile does not exist. (status code 404)
-         or Internal server error. Something went wrong on the server. (status code 500)</dd>
+         or Not found. User profile does not exist. (status code 404)</dd>
 </dl>
 </section>
 </li>
@@ -209,7 +210,7 @@ loadScripts(document, 'script');</script>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/user/settings",
                 produces="application/json")
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/GetUserSettingsResponse.html" title="class in in.devstream.openapi.model">GetUserSettingsResponse</a>&gt;</span>&nbsp;<span class="element-name">getUserSettings</span>()</div>
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseGetUserSettings.html" title="class in in.devstream.openapi.model">ResponseGetUserSettings</a>&gt;</span>&nbsp;<span class="element-name">getUserSettings</span>()</div>
 <div class="block">GET /user/settings : Retrieve user-specific settings.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -219,17 +220,41 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updateUserProfileInformation(in.devstream.openapi.model.UserProfile)">
+<section class="detail" id="updateUserPassword(java.lang.String,java.lang.String)">
+<h3>updateUserPassword</h3>
+<div class="member-signature"><span class="annotations">@RequestMapping(method=PATCH,
+                value="/user/password",
+                consumes={"application/x-www-form-urlencoded","application/json"})
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">updateUserPassword</span><wbr><span class="parameters">(@Valid @RequestParam(value="oldPassword",required=true)
+ @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oldPassword,
+ @Valid @RequestParam(value="newPassword",required=true)
+ @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;newPassword)</span></div>
+<div class="block">PATCH /user/password : Let&#39;s the user change their password with the help of old password.</div>
+<dl class="notes">
+<dt>Parameters:</dt>
+<dd><code>oldPassword</code> - (required)</dd>
+<dd><code>newPassword</code> - (required)</dd>
+<dt>Returns:</dt>
+<dd>Password updated successfully. (status code 200)
+         or Bad request. The input is invalid or missing required fields. (status code 400)
+         or Unauthorized. Invalid authentication provided. (status code 401)
+         or Forbidden. The user does not have permission to reset the password. (status code 403)
+         or Not found. The user does not exist in the system. (status code 404)</dd>
+</dl>
+</section>
+</li>
+<li>
+<section class="detail" id="updateUserProfileInformation(in.devstream.openapi.model.RequestUpdateUserProfile)">
 <h3>updateUserProfileInformation</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=PATCH,
                 value="/user/profile",
                 consumes="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">updateUserProfileInformation</span><wbr><span class="parameters">(@Valid @RequestBody
- @Valid <a href="../model/UserProfile.html" title="class in in.devstream.openapi.model">UserProfile</a>&nbsp;userProfile)</span></div>
+ @Valid <a href="../model/RequestUpdateUserProfile.html" title="class in in.devstream.openapi.model">RequestUpdateUserProfile</a>&nbsp;requestUpdateUserProfile)</span></div>
 <div class="block">PATCH /user/profile : Update user profile details.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>userProfile</code> - (required)</dd>
+<dd><code>requestUpdateUserProfile</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>User profile updated successfully. (status code 200)
          or Bad request. Invalid request format or missing required fields. (status code 400)
@@ -240,17 +265,17 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updateUserSettings(in.devstream.openapi.model.UpdateUserSettingsRequest)">
+<section class="detail" id="updateUserSettings(in.devstream.openapi.model.RequestUpdateUserSettings)">
 <h3>updateUserSettings</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=PATCH,
                 value="/user/settings",
                 consumes="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">updateUserSettings</span><wbr><span class="parameters">(@Valid @RequestBody
- @Valid <a href="../model/UpdateUserSettingsRequest.html" title="class in in.devstream.openapi.model">UpdateUserSettingsRequest</a>&nbsp;updateUserSettingsRequest)</span></div>
+ @Valid <a href="../model/RequestUpdateUserSettings.html" title="class in in.devstream.openapi.model">RequestUpdateUserSettings</a>&nbsp;requestUpdateUserSettings)</span></div>
 <div class="block">PATCH /user/settings : Update user-specific settings.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>updateUserSettingsRequest</code> - (required)</dd>
+<dd><code>requestUpdateUserSettings</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>Settings updated successfully. (status code 200)
          or Bad request. Invalid request format or missing required fields. (status code 400)
