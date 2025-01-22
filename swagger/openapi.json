@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.40"
+    "version" : "0.3.44"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -41,18 +41,21 @@
   }, {
     "description" : "Endpoints to deal with user content publishing pipeline.",
     "name" : "Pipeline"
+  }, {
+    "description" : "Endpoints related to user account recovery.",
+    "name" : "Recovery"
   } ],
   "paths" : {
     "/health" : {
       "get" : {
         "description" : "Health check for the API.",
-        "operationId" : "health-check",
+        "operationId" : "get-health",
         "responses" : {
           "200" : {
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/HealthResponse"
+                  "$ref" : "#/components/schemas/ResponseGetHealth"
                 }
               }
             },
@@ -78,7 +81,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/UserProfile"
+                  "$ref" : "#/components/schemas/ResponseGetUserProfile"
                 }
               }
             },
@@ -92,12 +95,11 @@
           },
           "404" : {
             "description" : "Not found. User profile does not exist."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
           }
         },
         "security" : [ {
+          "ApiKeyAuth" : [ ]
+        }, {
           "BearerAuth" : [ ]
         } ],
         "summary" : "Retrieve the current user's profile information.",
@@ -109,7 +111,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/UserProfile"
+                "$ref" : "#/components/schemas/RequestUpdateUserProfile"
               }
             }
           },
@@ -147,7 +149,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetUserSettingsResponse"
+                  "$ref" : "#/components/schemas/ResponseGetUserSettings"
                 }
               }
             },
@@ -169,7 +171,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/UpdateUserSettingsRequest"
+                "$ref" : "#/components/schemas/RequestUpdateUserSettings"
               }
             }
           },
@@ -201,7 +203,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/UserAnalytics"
+                  "$ref" : "#/components/schemas/ResponseGetUserAnalytics"
                 }
               }
             },
@@ -215,9 +217,6 @@
           },
           "404" : {
             "description" : "Not found. User analytics data does not exist."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
           }
         },
         "security" : [ {
@@ -227,19 +226,9 @@
         "tags" : [ "User" ]
       }
     },
-    "/user/{UserID}" : {
+    "/user/deactivate" : {
       "delete" : {
-        "operationId" : "delete-user-profile",
-        "parameters" : [ {
-          "explode" : false,
-          "in" : "path",
-          "name" : "UserID",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "style" : "simple"
-        } ],
+        "operationId" : "deactivate-user-account",
         "responses" : {
           "200" : {
             "description" : "User deleted successfully."
@@ -251,328 +240,13 @@
         "security" : [ {
           "BearerAuth" : [ ]
         } ],
-        "summary" : "Deletes user profile.",
+        "summary" : "Deactivates the current user account.",
         "tags" : [ "User" ]
       }
     },
-    "/auth/login" : {
-      "post" : {
-        "operationId" : "authenticate-user",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/LoginRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/LoginResponse"
-                }
-              }
-            },
-            "description" : "Login successful."
-          },
-          "400" : {
-            "description" : "Bad request. The input is invalid or missing required fields."
-          },
-          "401" : {
-            "description" : "Unauthorized. Invalid credentials provided."
-          },
-          "403" : {
-            "description" : "Forbidden. Access to the resource is denied."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
-          }
-        },
-        "security" : [ ],
-        "summary" : "Log in to the system.",
-        "tags" : [ "Auth" ]
-      }
-    },
-    "/auth/two-factor-auth" : {
-      "post" : {
-        "description" : "This is to validate the OTP generated if two factor authentication is enabled. The login ID must be tagged along with the OTP to map which login attempt this OTP belongs to.",
-        "operationId" : "two-factor-auth",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/TwofactorAuthRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/LoginResponse"
-                }
-              }
-            },
-            "description" : "OTP is valid for the given login ID. Hence user is authenticated and both access and refresh tokens are granted."
-          },
-          "400" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Bad request. Either OTP or login ID or both are missing."
-          },
-          "401" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Unauthorized. The OTP does not match with the one generated for this login ID or invalid OTP is provided."
-          }
-        },
-        "security" : [ ],
-        "summary" : "Endpoint to validate OTP for two factor authentication.",
-        "tags" : [ "Auth" ]
-      }
-    },
-    "/auth/register" : {
-      "post" : {
-        "operationId" : "register-user",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/RegisterRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "201" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/RegisterResponse"
-                }
-              }
-            },
-            "description" : "Registration successful."
-          },
-          "400" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Bad request. The input is invalid or missing required fields."
-          },
-          "409" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Conflict. A user with the provided details already exists."
-          }
-        },
-        "security" : [ ],
-        "summary" : "Registers a new user into the system.",
-        "tags" : [ "Auth" ]
-      }
-    },
-    "/auth/refresh-token" : {
-      "post" : {
-        "operationId" : "refresh-auth-token",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/RefreshTokenRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/RefreshTokenResponse"
-                }
-              }
-            },
-            "description" : "Token refreshed successfully."
-          },
-          "400" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Bad Request. The refresh token is missing or invalid."
-          },
-          "401" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Unauthorized. The provided refresh token is expired or revoked."
-          },
-          "403" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Forbidden. The request is not authorized (e.g., due to account restrictions)."
-          },
-          "404" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ErrorResponse"
-                }
-              }
-            },
-            "description" : "Not Found. The resource associated with the refresh token could not be found (unlikely, but possible)."
-          }
-        },
-        "security" : [ {
-          "BearerAuth" : [ ]
-        } ],
-        "summary" : "Refresh the authentication token.",
-        "tags" : [ "Auth" ]
-      }
-    },
-    "/auth/forgot-password" : {
-      "post" : {
-        "operationId" : "reset-password",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/ForgotPasswordRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Password reset request processed successfully."
-          },
-          "302" : {
-            "description" : "Found. User is already authenticated and redirected.",
-            "headers" : {
-              "Location" : {
-                "description" : "URL where the user is redirected.",
-                "explode" : false,
-                "schema" : {
-                  "format" : "uri",
-                  "type" : "string"
-                },
-                "style" : "simple"
-              }
-            }
-          },
-          "400" : {
-            "description" : "Bad request. The input is invalid or missing required fields."
-          },
-          "401" : {
-            "description" : "Unauthorized. Invalid authentication provided."
-          },
-          "403" : {
-            "description" : "Forbidden. The user does not have permission to perform this action."
-          },
-          "404" : {
-            "description" : "Not found. The user does not exist in the system."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
-          },
-          "503" : {
-            "description" : "Service unavailable. System is under maintenance or overloaded."
-          }
-        },
-        "security" : [ {
-          "BearerAuth" : [ ]
-        } ],
-        "summary" : "Request a password reset link.",
-        "tags" : [ "Auth" ]
-      }
-    },
-    "/auth/reset-password" : {
-      "post" : {
-        "operationId" : "reset-user-password",
-        "requestBody" : {
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/ResetPasswordRequest"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "200" : {
-            "description" : "Password reset successfully."
-          },
-          "400" : {
-            "description" : "Bad request. The input is invalid or missing required fields."
-          },
-          "401" : {
-            "description" : "Unauthorized. Invalid authentication provided."
-          },
-          "403" : {
-            "description" : "Forbidden. The user does not have permission to reset the password."
-          },
-          "404" : {
-            "description" : "Not found. The user does not exist in the system."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
-          }
-        },
-        "security" : [ {
-          "BearerAuth" : [ ]
-        } ],
-        "summary" : "Reset the user's password.",
-        "tags" : [ "Auth" ]
-      }
-    },
-    "/content" : {
+    "/user/content" : {
       "get" : {
-        "operationId" : "get-all-content-by-user-id",
+        "operationId" : "get-user-content",
         "parameters" : [ {
           "description" : "Filter content (e.g., by date or platform).",
           "explode" : true,
@@ -589,7 +263,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ContentListResponse"
+                  "$ref" : "#/components/schemas/ResponseGetUserContent"
                 }
               }
             },
@@ -610,13 +284,13 @@
       },
       "post" : {
         "description" : "On successful completion of this request, the response contents a pre signed url in which the user needs to upload the content. On successful completion of document update, it's responsibility of the document uploading server to notify the application server that the content has been uploaded.",
-        "operationId" : "publish-content",
+        "operationId" : "create-user-content",
         "responses" : {
           "200" : {
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PreSignedURLResponse"
+                  "$ref" : "#/components/schemas/ResponsePreSignedURL"
                 }
               }
             },
@@ -633,16 +307,442 @@
         "tags" : [ "Content" ]
       }
     },
+    "/user/password" : {
+      "patch" : {
+        "operationId" : "update-user-password",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestUpdateUserPassword"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestUpdateUserPassword"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Password updated successfully."
+          },
+          "400" : {
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid authentication provided."
+          },
+          "403" : {
+            "description" : "Forbidden. The user does not have permission to reset the password."
+          },
+          "404" : {
+            "description" : "Not found. The user does not exist in the system."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Let's the user change their password with the help of old password.",
+        "tags" : [ "User" ]
+      }
+    },
+    "/auth/login" : {
+      "post" : {
+        "operationId" : "auth-login",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestLogin"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestLogin"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseLogin"
+                }
+              }
+            },
+            "description" : "Login successful."
+          },
+          "302" : {
+            "description" : "Found. User is already authenticated and redirected.",
+            "headers" : {
+              "x-redirection-location" : {
+                "description" : "URL where the user is redirected.",
+                "explode" : false,
+                "schema" : {
+                  "format" : "uri",
+                  "type" : "string"
+                },
+                "style" : "simple"
+              }
+            }
+          },
+          "400" : {
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "401" : {
+            "description" : "Unauthorized. Invalid credentials provided."
+          },
+          "403" : {
+            "description" : "Forbidden. Access to the resource is denied."
+          },
+          "429" : {
+            "description" : "Too many requests. Rate limit exceeded."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Let's the user login to the system with given credentials.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/auth/two-factor-auth" : {
+      "post" : {
+        "description" : "This is to validate the OTP generated if two factor authentication is enabled. The login ID must be tagged along with the OTP to map which login attempt this OTP belongs to.",
+        "operationId" : "two-factor-auth",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestTwofactorAuth"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestTwofactorAuth"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseLogin"
+                }
+              }
+            },
+            "description" : "OTP is valid for the given login ID. Hence user is authenticated and both access and refresh tokens are granted."
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "Bad request. Either OTP or login ID or both are missing."
+          },
+          "401" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "Unauthorized. The OTP does not match with the one generated for this login ID or invalid OTP is provided."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Endpoint to validate OTP for two factor authentication.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/auth/register" : {
+      "post" : {
+        "operationId" : "auth-register",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRegister"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRegister"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Registration successful."
+          },
+          "302" : {
+            "description" : "Found. User is already authenticated and redirected.",
+            "headers" : {
+              "x-redirection-location" : {
+                "description" : "URL where the user is redirected.",
+                "explode" : false,
+                "schema" : {
+                  "format" : "uri",
+                  "type" : "string"
+                },
+                "style" : "simple"
+              }
+            }
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "Bad request. The input is invalid or missing required fields."
+          },
+          "409" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "Conflict. A user with the provided details already exists."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Registers a new user into the system.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/auth/revalidate" : {
+      "post" : {
+        "description" : "This endpoint is used to revalidate the authentication token given the refresh token of the user. This endpoint returns a new valid authentication token. Without refresh token, this endpoint will not create a new authentication token. For getting an authentication token without refresh token, try [logging in](/auth/login).",
+        "operationId" : "auth-revalidate",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestAuthRevalidate"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseAuthRevalidate"
+                }
+              }
+            },
+            "description" : "Token refreshed successfully."
+          },
+          "400" : {
+            "description" : "The refresh token is missing or invalid."
+          },
+          "401" : {
+            "description" : "The provided refresh token is expired or revoked."
+          },
+          "403" : {
+            "description" : "The request is not authorized (e.g., due to account restrictions)."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Revalidates an authentication token.",
+        "tags" : [ "Auth" ]
+      }
+    },
+    "/recovery/initiate" : {
+      "post" : {
+        "description" : "This route generates a password reset OTP and sends it via either email,  mobile number, or a seperate medium. A signed token is also generated and  sent in the response of this request. The user must submit both the OTP (sent via a seperate medium) and the signed token (sent as a response to this) to  verify the request and proceed with account recovery.\n",
+        "operationId" : "recovery-initiate",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRecoveryInitiate"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRecoveryInitiate"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseRecoveryInitiate"
+                }
+              }
+            },
+            "description" : "Recovery OTP generated and queued to be sent via a seperate medium. A signed token is sent as a response which is required to be sent while resetting the password."
+          },
+          "400" : {
+            "description" : "The input provided is invalid or missing required fields."
+          },
+          "401" : {
+            "description" : "Authentication is invalid or missing."
+          },
+          "404" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "The user does not exist in the system."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Generates a password reset OTP and sends it via email or other channels.",
+        "tags" : [ "Recovery" ]
+      }
+    },
+    "/recovery/challenge" : {
+      "post" : {
+        "description" : "When a user initiates a password recovery, they are sent a unique challenge  code (via email, SMS, or another medium) and a signed token in the response.  The client must submit this code along with the signed token to confirm  their identity.\nUpon successful verification, the server responds with another signed token  and its validity period (in seconds) in response. The user can reset their  password by submitting the new password along with the signed token within  the specified expiration time. \nIf the provided code is invalid, expired, or does not match the expected challenge, the server will respond with an appropriate error message.\nThe token should be kept secure by client to prevent unauthorized access.\n",
+        "operationId" : "recovery-challenge",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRecoveryChallenge"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRecoveryChallenge"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseRecoveryChallenge"
+                }
+              }
+            },
+            "description" : "Recovery challenge verified successfully. A signed token and its validity period are returned for resetting the password."
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "The input is invalid or missing required fields."
+          },
+          "403" : {
+            "description" : "The user does not have permission to perform this action."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Verifies the recovery challenge code and token from the recovery initiation step.",
+        "tags" : [ "Recovery" ]
+      }
+    },
+    "/recovery/reset" : {
+      "post" : {
+        "description" : "This route allows the user to reset their password by submitting the new password along with the signed token received during the recovery challenge step. The token  must be submitted within the specified expiration time. The server will validate  the token and the new password before resetting it. If the token is invalid, expired,  or incorrect, an appropriate error message will be returned.\nUpon successful password reset, the server responds with a success message.  The user can now log in with their new password.\n",
+        "operationId" : "recovery-reset",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRecoveryReset"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestRecoveryReset"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseSuccessMessage"
+                }
+              }
+            },
+            "description" : "Password reset successful. The user can now log in with the new password."
+          },
+          "400" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "The input is invalid or missing required fields."
+          },
+          "401" : {
+            "description" : "Invalid or expired token."
+          },
+          "403" : {
+            "description" : "The token is incorrect or has been tampered with."
+          },
+          "404" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseProblem"
+                }
+              }
+            },
+            "description" : "The user does not exist in the system or the token is invalid."
+          }
+        },
+        "security" : [ ],
+        "summary" : "Resets the user's password using the recovery challenge token and new password.",
+        "tags" : [ "Recovery" ]
+      }
+    },
     "/content/{ContentID}" : {
       "delete" : {
-        "operationId" : "delete-content",
+        "operationId" : "delete-content-by-id",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -661,9 +761,6 @@
           },
           "404" : {
             "description" : "Content not found."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
           }
         },
         "security" : [ {
@@ -673,14 +770,14 @@
         "tags" : [ "Content" ]
       },
       "get" : {
-        "operationId" : "get-content-details",
+        "operationId" : "get-content-by-id",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -689,7 +786,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ContentDetails"
+                  "$ref" : "#/components/schemas/TypeContentDetails"
                 }
               }
             },
@@ -706,9 +803,6 @@
           },
           "404" : {
             "description" : "Content not found."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
           }
         },
         "security" : [ {
@@ -720,14 +814,14 @@
     },
     "/content/status/{ContentID}" : {
       "get" : {
-        "operationId" : "get-content-status",
+        "operationId" : "get-content-status-by-id",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -736,7 +830,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/get_content_status_200_response"
+                  "$ref" : "#/components/schemas/ResponseGetContentStatusByID"
                 }
               }
             },
@@ -756,14 +850,14 @@
         "tags" : [ "Content" ]
       },
       "patch" : {
-        "operationId" : "change-content-status-for-id",
+        "operationId" : "update-content-status-by-id",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -771,7 +865,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/UpdateContentStatusRequest"
+                "$ref" : "#/components/schemas/RequestUpdateContentStatusByID"
               }
             }
           },
@@ -792,28 +886,31 @@
         "tags" : [ "Content" ]
       }
     },
-    "/content/invite/{ContentID}" : {
+    "/content/collaboration/{ContentID}" : {
       "get" : {
-        "operationId" : "get-pending-invitations",
+        "operationId" : "get-content-collaboration-by-id",
         "parameters" : [ {
           "explode" : false,
           "in" : "path",
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
+        }, {
+          "description" : "The current status of the collaboration request.",
+          "explode" : true,
+          "in" : "query",
+          "name" : "status",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/TypeCollaborationStatus"
+          },
+          "style" : "form"
         } ],
         "responses" : {
           "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/CollaborationActionResponse"
-                }
-              }
-            },
             "description" : "List of pending invitations."
           },
           "404" : {
@@ -826,7 +923,7 @@
         "security" : [ {
           "BearerAuth" : [ ]
         } ],
-        "summary" : "View pending collaboration invitations.",
+        "summary" : "Get all collaboration requests for a particular content",
         "tags" : [ "Content" ]
       },
       "patch" : {
@@ -838,7 +935,7 @@
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -846,7 +943,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CollaborationActionResponse"
+                "$ref" : "#/components/schemas/RequestCollaborationAction"
               }
             }
           },
@@ -880,7 +977,7 @@
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -888,7 +985,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CollaborationRequest"
+                "$ref" : "#/components/schemas/RequestCollaboration"
               }
             }
           },
@@ -924,7 +1021,7 @@
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -933,7 +1030,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/ContentAnalytics"
+                  "$ref" : "#/components/schemas/ResponseGetContentAnalyticsByID"
                 }
               }
             },
@@ -950,9 +1047,6 @@
           },
           "404" : {
             "description" : "Content not found."
-          },
-          "429" : {
-            "description" : "Too many requests. Rate limit exceeded."
           }
         },
         "security" : [ {
@@ -972,7 +1066,7 @@
           "name" : "ContentID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/ContentID"
+            "$ref" : "#/components/schemas/TypeContentID"
           },
           "style" : "simple"
         } ],
@@ -1003,7 +1097,7 @@
           "name" : "PlatformID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/Platform"
+            "$ref" : "#/components/schemas/TypeSupportedPlatform"
           },
           "style" : "simple"
         } ],
@@ -1019,9 +1113,6 @@
           },
           "404" : {
             "description" : "Not found. The platform does not exist."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
           }
         },
         "security" : [ {
@@ -1038,7 +1129,7 @@
           "name" : "PlatformID",
           "required" : true,
           "schema" : {
-            "$ref" : "#/components/schemas/Platform"
+            "$ref" : "#/components/schemas/TypeSupportedPlatform"
           },
           "style" : "simple"
         } ],
@@ -1054,9 +1145,6 @@
           },
           "404" : {
             "description" : "Not found. The platform does not exist."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
           }
         },
         "security" : [ {
@@ -1073,7 +1161,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/PlatformSyncRequest"
+                "$ref" : "#/components/schemas/RequestPlatformSync"
               }
             }
           },
@@ -1094,9 +1182,6 @@
           },
           "404" : {
             "description" : "Not found. The specified platform could not be found."
-          },
-          "500" : {
-            "description" : "Internal server error. Something went wrong on the server."
           }
         },
         "security" : [ {
@@ -1130,7 +1215,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/CreatePipelineRequest"
+                "$ref" : "#/components/schemas/RequestCreatePipeline"
               }
             }
           },
@@ -1141,7 +1226,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/CreatePipelineResponse"
+                  "$ref" : "#/components/schemas/ResponseCreatePipeline"
                 }
               }
             },
@@ -1161,23 +1246,13 @@
   },
   "components" : {
     "parameters" : {
-      "UserIDParam" : {
-        "explode" : false,
-        "in" : "path",
-        "name" : "UserID",
-        "required" : true,
-        "schema" : {
-          "type" : "string"
-        },
-        "style" : "simple"
-      },
       "ContentIDParam" : {
         "explode" : false,
         "in" : "path",
         "name" : "ContentID",
         "required" : true,
         "schema" : {
-          "$ref" : "#/components/schemas/ContentID"
+          "$ref" : "#/components/schemas/TypeContentID"
         },
         "style" : "simple"
       },
@@ -1187,13 +1262,13 @@
         "name" : "PlatformID",
         "required" : true,
         "schema" : {
-          "$ref" : "#/components/schemas/Platform"
+          "$ref" : "#/components/schemas/TypeSupportedPlatform"
         },
         "style" : "simple"
       }
     },
     "schemas" : {
-      "HealthResponse" : {
+      "ResponseGetHealth" : {
         "properties" : {
           "timestamp" : {
             "format" : "date-time",
@@ -1211,58 +1286,114 @@
         "required" : [ "status", "timestamp", "uptime" ],
         "type" : "object"
       },
-      "UserProfile" : {
+      "TypeHonorifics" : {
+        "enum" : [ "Mr", "Mrs", "Miss", "Ms", "Mx", "Sir", "Dr", "Prof", "Rev", "Capt", "Col", "Maj", "Judge", "Shri", "Smt", "Kumari", "Pandit", "Swami", "Begum", "Sahib", "Janab" ],
+        "type" : "string"
+      },
+      "TypeUserGender" : {
+        "enum" : [ "Male", "Female", "Transgender" ],
+        "type" : "string"
+      },
+      "ResponseGetUserProfile" : {
         "properties" : {
-          "userID" : {
-            "format" : "uuid",
+          "honorifics" : {
+            "$ref" : "#/components/schemas/TypeHonorifics"
+          },
+          "firstname" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "middlename" : {
+            "type" : "string"
+          },
+          "lastname" : {
+            "minLength" : 1,
+            "type" : "string"
+          },
+          "gender" : {
+            "$ref" : "#/components/schemas/TypeUserGender"
+          },
+          "dateOfBirth" : {
+            "format" : "date",
             "type" : "string"
           },
           "username" : {
+            "maxLength" : 24,
+            "minLength" : 4,
+            "readOnly" : true,
             "type" : "string"
           },
           "email" : {
             "format" : "email",
             "type" : "string"
           },
+          "isEmailVerified" : {
+            "default" : false,
+            "type" : "boolean"
+          },
+          "mobileNumber" : {
+            "pattern" : "^[+]{1}(?:[0-9\\-\\(\\)\\/\\.]\\s?){6, 15}[0-9]{1}$",
+            "type" : "string"
+          },
+          "isMobileVerified" : {
+            "default" : false,
+            "type" : "boolean"
+          },
+          "twoFactorAuthentication" : {
+            "default" : true,
+            "description" : "Whether two factor authentication hould be used or not.",
+            "type" : "boolean"
+          }
+        },
+        "required" : [ "dateOfBirth", "email", "firstname", "gender", "lastname", "mobileNumber", "password", "username" ],
+        "type" : "object"
+      },
+      "RequestUpdateUserProfile" : {
+        "properties" : {
+          "username" : {
+            "type" : "string"
+          },
           "avatarURL" : {
-            "format" : "uri",
             "type" : "string"
           }
         },
-        "required" : [ "avatarURL", "email", "userID", "username" ],
+        "required" : [ "avatarURL", "username" ],
         "type" : "object"
       },
-      "UserVisibility" : {
+      "TypeUserVisibility" : {
         "description" : "Whether a particular user setting or content is available for public viewing or private access. This is again subject to implementation details as without being a social media, only some users can find other users profile. Hence probably it is only for controlling the views of user profile rather than the content user posts.",
         "enum" : [ "Public", "Private" ],
         "type" : "string"
       },
-      "GetUserSettingsResponse" : {
+      "ResponseGetUserSettings" : {
         "properties" : {
           "notifications" : {
             "type" : "boolean"
           },
           "visibility" : {
-            "$ref" : "#/components/schemas/UserVisibility"
+            "$ref" : "#/components/schemas/TypeUserVisibility"
           }
         },
         "required" : [ "notifications", "visibility" ],
         "type" : "object"
       },
-      "UpdateUserSettingsRequest" : {
+      "RequestUpdateUserSettings" : {
         "properties" : {
           "notifications" : {
             "type" : "boolean"
           },
           "visibility" : {
-            "$ref" : "#/components/schemas/UserVisibility"
+            "$ref" : "#/components/schemas/TypeUserVisibility"
           }
         },
         "required" : [ "notifications", "visibility" ],
         "type" : "object"
       },
-      "UserAnalytics" : {
+      "ResponseGetUserAnalytics" : {
         "properties" : {
+          "userID" : {
+            "type" : "string"
+          },
           "totalContent" : {
             "description" : "Total number of content the user has uploaded.",
             "type" : "integer"
@@ -1272,10 +1403,91 @@
             "type" : "integer"
           }
         },
-        "required" : [ "totalContent", "totalViews" ],
+        "required" : [ "totalContent", "totalViews", "userID" ],
         "type" : "object"
       },
-      "LoginRequest" : {
+      "TypeContentID" : {
+        "description" : "ID of the uploaded content",
+        "example" : "acde070d-8c4c-4f0d-9d8a-162843c10333",
+        "type" : "string"
+      },
+      "TypePipelineID" : {
+        "description" : "Identifier to uniquely identify a pipeline.",
+        "type" : "string"
+      },
+      "TypeSupportedPlatform" : {
+        "description" : "List of supported platforms.",
+        "enum" : [ "Facebook", "LinkedIn", "Twitter", "Instagram", "TikTok", "Reddit", "SnapChat", "YouTube" ],
+        "type" : "string"
+      },
+      "TypeContentDetails" : {
+        "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/TypeContentID"
+          },
+          "pipelineID" : {
+            "$ref" : "#/components/schemas/TypePipelineID"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "platforms" : {
+            "description" : "List of platforms on which the content is published.",
+            "items" : {
+              "$ref" : "#/components/schemas/TypeSupportedPlatform"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "contentID", "description", "pipelineID", "platforms", "title" ],
+        "type" : "object"
+      },
+      "ResponseGetUserContent" : {
+        "properties" : {
+          "contents" : {
+            "items" : {
+              "$ref" : "#/components/schemas/TypeContentDetails"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "contents" ],
+        "type" : "object"
+      },
+      "ResponsePreSignedURL" : {
+        "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/TypeContentID"
+          },
+          "preSignedURL" : {
+            "description" : "Presigned URL to upload the content with specified ID into the object storage.",
+            "format" : "uri",
+            "type" : "string"
+          }
+        },
+        "required" : [ "contentID", "preSignedURL" ],
+        "type" : "object"
+      },
+      "RequestUpdateUserPassword" : {
+        "properties" : {
+          "oldPassword" : {
+            "format" : "password",
+            "type" : "string",
+            "writeOnly" : true
+          },
+          "newPassword" : {
+            "format" : "password",
+            "type" : "string",
+            "writeOnly" : true
+          }
+        },
+        "required" : [ "newPassword", "oldPassword" ],
+        "type" : "object"
+      },
+      "RequestLogin" : {
         "properties" : {
           "email" : {
             "format" : "email",
@@ -1290,7 +1502,7 @@
         "required" : [ "email", "password" ],
         "type" : "object"
       },
-      "LoginResponse" : {
+      "ResponseLogin" : {
         "description" : "Check if requiresTwoFactorAuth is true, then use ID and generated OTP to send another request to get authentication tokens. If two factor authentication is set to false, directly access the tokens from the object.",
         "properties" : {
           "requiresTwoFactorAuth" : {
@@ -1317,7 +1529,7 @@
         "required" : [ "accessToken", "loginAttemptID", "loginAttemptTimeStamp", "refreshToken", "requiresTwoFactorAuth" ],
         "type" : "object"
       },
-      "TwofactorAuthRequest" : {
+      "RequestTwofactorAuth" : {
         "description" : "Contains a pair of login attempt ID and it's corresponding OTP.",
         "properties" : {
           "loginAttemptID" : {
@@ -1329,7 +1541,7 @@
         },
         "type" : "object"
       },
-      "ErrorDetails" : {
+      "TypeProblemDetails" : {
         "properties" : {
           "target" : {
             "description" : "The target of this specific error i.e. which attribute caused the error.",
@@ -1345,7 +1557,7 @@
         "required" : [ "message", "target" ],
         "type" : "object"
       },
-      "ErrorResponse" : {
+      "ResponseProblem" : {
         "example" : {
           "errors" : [ {
             "message" : "Must be a valid email address.",
@@ -1358,7 +1570,7 @@
         "properties" : {
           "errors" : {
             "items" : {
-              "$ref" : "#/components/schemas/ErrorDetails"
+              "$ref" : "#/components/schemas/TypeProblemDetails"
             },
             "type" : "array"
           }
@@ -1366,12 +1578,11 @@
         "required" : [ "errors" ],
         "type" : "object"
       },
-      "Gender" : {
-        "enum" : [ "Male", "Female", "Transgender" ],
-        "type" : "string"
-      },
-      "RegisterRequest" : {
+      "RequestRegister" : {
         "properties" : {
+          "honorifics" : {
+            "$ref" : "#/components/schemas/TypeHonorifics"
+          },
           "firstname" : {
             "minLength" : 1,
             "type" : "string"
@@ -1384,7 +1595,7 @@
             "type" : "string"
           },
           "gender" : {
-            "$ref" : "#/components/schemas/Gender"
+            "$ref" : "#/components/schemas/TypeUserGender"
           },
           "dateOfBirth" : {
             "format" : "date",
@@ -1420,21 +1631,7 @@
         "required" : [ "dateOfBirth", "email", "firstname", "gender", "lastname", "mobileNumber", "password", "username" ],
         "type" : "object"
       },
-      "Status" : {
-        "description" : "Status of a job or a long running task.",
-        "enum" : [ "Success", "Pending", "Error" ],
-        "type" : "string"
-      },
-      "RegisterResponse" : {
-        "properties" : {
-          "status" : {
-            "$ref" : "#/components/schemas/Status"
-          }
-        },
-        "required" : [ "status" ],
-        "type" : "object"
-      },
-      "RefreshTokenRequest" : {
+      "RequestAuthRevalidate" : {
         "properties" : {
           "refreshToken" : {
             "type" : "string"
@@ -1443,7 +1640,7 @@
         "required" : [ "refreshToken" ],
         "type" : "object"
       },
-      "RefreshTokenResponse" : {
+      "ResponseAuthRevalidate" : {
         "properties" : {
           "accessToken" : {
             "type" : "string"
@@ -1455,7 +1652,7 @@
         "required" : [ "accessToken", "refreshToken" ],
         "type" : "object"
       },
-      "ForgotPasswordRequest" : {
+      "RequestRecoveryInitiate" : {
         "properties" : {
           "email" : {
             "format" : "email",
@@ -1465,12 +1662,73 @@
         "required" : [ "email" ],
         "type" : "object"
       },
-      "ResetPasswordRequest" : {
+      "TypeRecoveryID" : {
+        "description" : "An unique ID to identify the recovery process for a user.",
+        "format" : "uuid",
+        "type" : "string"
+      },
+      "TypeRecoveryToken" : {
+        "description" : "A token signed by the server for validating recovery process. This token is required to be sent at each of the succeeding step to verify the authenticity of the recovery process.",
+        "format" : "base64",
+        "type" : "string"
+      },
+      "ResponseRecoveryInitiate" : {
         "properties" : {
-          "oldPassword" : {
-            "format" : "password",
-            "type" : "string",
-            "writeOnly" : true
+          "recoveryID" : {
+            "$ref" : "#/components/schemas/TypeRecoveryID"
+          },
+          "recoveryToken" : {
+            "$ref" : "#/components/schemas/TypeRecoveryToken"
+          },
+          "recoveryInitiationTime" : {
+            "description" : "Server timestamp as which the recovery initialization request started processing.",
+            "format" : "date-time",
+            "type" : "string"
+          },
+          "challengeValidTill" : {
+            "description" : "Server timestamp till which the challenge sent will be valid.",
+            "format" : "date-time",
+            "type" : "string"
+          }
+        },
+        "required" : [ "challengeValidTill", "recoveryID", "recoveryInitiationTime", "recoveryToken" ],
+        "type" : "object"
+      },
+      "RequestRecoveryChallenge" : {
+        "description" : "Contains the recoveryID for which the challenge is being conducted, the token signed by the server and the challenge sent via seperate medium.",
+        "properties" : {
+          "recoveryID" : {
+            "$ref" : "#/components/schemas/TypeRecoveryID"
+          },
+          "recoveryToken" : {
+            "$ref" : "#/components/schemas/TypeRecoveryToken"
+          },
+          "challenge" : {
+            "type" : "string"
+          }
+        },
+        "required" : [ "challenge", "recoveryID", "recoveryToken" ],
+        "type" : "object"
+      },
+      "ResponseRecoveryChallenge" : {
+        "properties" : {
+          "recoveryID" : {
+            "$ref" : "#/components/schemas/TypeRecoveryID"
+          },
+          "recoveryToken" : {
+            "$ref" : "#/components/schemas/TypeRecoveryToken"
+          }
+        },
+        "required" : [ "recoveryID", "recoveryToken" ],
+        "type" : "object"
+      },
+      "RequestRecoveryReset" : {
+        "properties" : {
+          "recoveryID" : {
+            "$ref" : "#/components/schemas/TypeRecoveryID"
+          },
+          "recoveryToken" : {
+            "$ref" : "#/components/schemas/TypeRecoveryToken"
           },
           "newPassword" : {
             "format" : "password",
@@ -1478,129 +1736,104 @@
             "writeOnly" : true
           }
         },
-        "required" : [ "newPassword", "oldPassword" ],
+        "required" : [ "newPassword", "recoveryID", "recoveryToken" ],
         "type" : "object"
       },
-      "ContentID" : {
-        "description" : "ID of the uploaded content",
-        "example" : "acde070d-8c4c-4f0d-9d8a-162843c10333",
-        "type" : "string"
-      },
-      "Platform" : {
-        "description" : "Currently used device",
-        "enum" : [ "Facebook", "LinkedIn", "Twitter", "Instagram", "TikTok", "Reddit", "SnapChat", "YouTube" ],
-        "type" : "string"
-      },
-      "ContentDetails" : {
+      "ResponseSuccessMessage" : {
+        "additionalProperties" : true,
         "properties" : {
-          "contentID" : {
-            "$ref" : "#/components/schemas/ContentID"
-          },
-          "title" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "platforms" : {
-            "description" : "List of platforms on which the content is published.",
-            "items" : {
-              "$ref" : "#/components/schemas/Platform"
-            },
-            "type" : "array"
-          }
-        },
-        "required" : [ "contentID", "description", "platforms", "title" ],
-        "type" : "object"
-      },
-      "ContentListResponse" : {
-        "properties" : {
-          "contents" : {
-            "items" : {
-              "$ref" : "#/components/schemas/ContentDetails"
-            },
-            "type" : "array"
-          }
-        },
-        "required" : [ "contents" ],
-        "type" : "object"
-      },
-      "PreSignedURLResponse" : {
-        "properties" : {
-          "contentID" : {
-            "$ref" : "#/components/schemas/ContentID"
-          },
-          "preSignedURL" : {
-            "description" : "Presigned URL to upload the content with specified ID into the object storage.",
-            "format" : "uri",
+          "message" : {
             "type" : "string"
           }
         },
-        "required" : [ "contentID", "preSignedURL" ],
         "type" : "object"
       },
-      "ContentStatus" : {
+      "TypeContentStatus" : {
         "description" : "Current status of the uploaded content",
         "enum" : [ "Uploading", "Processing", "Published", "Failed", "Deleted", "UnderReview" ],
         "type" : "string"
       },
-      "UpdateContentStatusRequest" : {
+      "ResponseGetContentStatusByID" : {
+        "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/TypeContentID"
+          },
+          "status" : {
+            "$ref" : "#/components/schemas/TypeContentStatus"
+          }
+        },
+        "required" : [ "contentID", "status" ],
+        "type" : "object"
+      },
+      "RequestUpdateContentStatusByID" : {
         "description" : "Changes the status of the content with given ID.",
         "properties" : {
           "updatedStatus" : {
-            "$ref" : "#/components/schemas/ContentStatus"
+            "$ref" : "#/components/schemas/TypeContentStatus"
           }
         },
         "required" : [ "updatedStatus" ],
         "type" : "object"
       },
-      "CollaborationActionResponse" : {
-        "properties" : {
-          "status" : {
-            "$ref" : "#/components/schemas/Status"
-          },
-          "message" : {
-            "type" : "string"
-          }
-        },
-        "required" : [ "message", "status" ],
-        "type" : "object"
+      "TypeCollaborationStatus" : {
+        "description" : "Status of collaboration request, the collaborator could have accepted the request, rejected the request, or haven't decided yet, in which case the request status is still pending.",
+        "enum" : [ "Pending", "Accepted", "Declined" ],
+        "type" : "string"
       },
-      "AccessType" : {
-        "description" : "Access type for the corresponding content",
+      "TypeContentPermission" : {
+        "description" : "Access permission for the corresponding content.",
         "enum" : [ "Viewer", "Commenter", "Editor", "Owner" ],
         "type" : "string"
       },
-      "UserCollaboration" : {
-        "description" : "This can be used to grant a particular access to a particular user provided it is used with the content identifier. This object does not include the content identifier because it is designed to be used in a list of user collaboration objects to grant access to one content, as the owner user can at one time change access of only one content.",
+      "TypeUserContentAccessControl" : {
+        "description" : "This can be used to grant a particular access to a particular user when used with the content identifier.",
         "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/TypeContentID"
+          },
           "userID" : {
             "type" : "string"
           },
-          "accessType" : {
-            "$ref" : "#/components/schemas/AccessType"
+          "permission" : {
+            "$ref" : "#/components/schemas/TypeContentPermission"
           }
         },
-        "required" : [ "accessType", "userID" ],
+        "required" : [ "contentID", "permission", "userID" ],
         "type" : "object"
       },
-      "CollaborationRequest" : {
+      "RequestCollaboration" : {
         "properties" : {
-          "contentID" : {
-            "$ref" : "#/components/schemas/ContentID"
-          },
-          "users" : {
+          "permissions" : {
             "items" : {
-              "$ref" : "#/components/schemas/UserCollaboration"
+              "$ref" : "#/components/schemas/TypeUserContentAccessControl"
             },
             "type" : "array"
           }
         },
-        "required" : [ "contentID", "users" ],
+        "required" : [ "permissions" ],
         "type" : "object"
       },
-      "ContentAnalytics" : {
+      "TypeUserDecision" : {
+        "enum" : [ "Accept", "Decline" ],
+        "type" : "string"
+      },
+      "RequestCollaborationAction" : {
         "properties" : {
+          "invitationID" : {
+            "type" : "string"
+          },
+          "action" : {
+            "$ref" : "#/components/schemas/TypeUserDecision"
+          }
+        },
+        "required" : [ "action", "invitationID" ],
+        "type" : "object"
+      },
+      "TypeContentAnalytics" : {
+        "properties" : {
+          "platform" : {
+            "$ref" : "#/components/schemas/TypeSupportedPlatform"
+          },
           "views" : {
             "type" : "integer"
           },
@@ -1608,14 +1841,31 @@
             "type" : "integer"
           }
         },
-        "required" : [ "engagement", "views" ],
+        "required" : [ "engagement", "platform", "views" ],
         "type" : "object"
       },
-      "PlatformSyncRequest" : {
+      "ResponseGetContentAnalyticsByID" : {
+        "description" : "Contents an array with the analytics of all the platform the content is published on.",
+        "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/TypeContentID"
+          },
+          "analytics" : {
+            "items" : {
+              "$ref" : "#/components/schemas/TypeContentAnalytics"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "analytics", "contentID" ],
+        "type" : "object"
+      },
+      "RequestPlatformSync" : {
+        "description" : "Used to sync data with the provided platforms.",
         "properties" : {
           "platform" : {
             "items" : {
-              "$ref" : "#/components/schemas/Platform"
+              "$ref" : "#/components/schemas/TypeSupportedPlatform"
             },
             "type" : "array"
           }
@@ -1623,20 +1873,20 @@
         "required" : [ "platform" ],
         "type" : "object"
       },
-      "PipelineStep" : {
+      "TypePipelineStep" : {
         "enum" : [ 0, 1, 2, 3, 4 ],
         "type" : "integer",
         "x-enum-varnames" : [ "ClosedCaptionGeneration", "HashtagsGeneration", "DescriptionGeneration", "VoiceoverGeneration", "SoundTrackGeneration" ],
-        "x-enum-descriptions" : [ "Description ClosedCaptionGeneration", "Description HashtagsGeneration", "Description DescriptionGeneration", "Description VoiceoverGeneration", "Description SoundTrackGeneration" ]
+        "x-enum-descriptions" : [ "Generate Closed Caption", "Generate Hashtags", "Generate Description", "Generate Voiceover", "Generate SoundTrack" ]
       },
-      "ContentPipeline" : {
+      "TypeContentPipeline" : {
         "properties" : {
           "platform" : {
-            "$ref" : "#/components/schemas/Platform"
+            "$ref" : "#/components/schemas/TypeSupportedPlatform"
           },
           "steps" : {
             "items" : {
-              "$ref" : "#/components/schemas/PipelineStep"
+              "$ref" : "#/components/schemas/TypePipelineStep"
             },
             "type" : "array"
           }
@@ -1644,7 +1894,7 @@
         "required" : [ "platform", "steps" ],
         "type" : "object"
       },
-      "CreatePipelineRequest" : {
+      "RequestCreatePipeline" : {
         "properties" : {
           "isTemporary" : {
             "default" : true,
@@ -1658,7 +1908,7 @@
           },
           "pipeline" : {
             "items" : {
-              "$ref" : "#/components/schemas/ContentPipeline"
+              "$ref" : "#/components/schemas/TypeContentPipeline"
             },
             "type" : "array"
           }
@@ -1666,7 +1916,7 @@
         "required" : [ "isTemporary", "pipeline" ],
         "type" : "object"
       },
-      "CreatePipelineResponse" : {
+      "ResponseCreatePipeline" : {
         "description" : "Response after a particular pipeline is saved in persisting storage. The pipeline can either be saved under a particular user account or as a temporary pipeline specification for processing a single content.",
         "properties" : {
           "pipelineID" : {
@@ -1676,15 +1926,6 @@
           }
         },
         "required" : [ "pipelineID" ],
-        "type" : "object"
-      },
-      "get_content_status_200_response" : {
-        "properties" : {
-          "status" : {
-            "$ref" : "#/components/schemas/ContentStatus"
-          }
-        },
-        "required" : [ "status" ],
         "type" : "object"
       }
     },
