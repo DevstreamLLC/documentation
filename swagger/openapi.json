@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.59"
+    "version" : "0.3.62"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -1229,7 +1229,7 @@
           "required" : true
         },
         "responses" : {
-          "200" : {
+          "204" : {
             "description" : "Pipeline specification modified successfully."
           },
           "400" : {
@@ -1261,7 +1261,7 @@
           "required" : true
         },
         "responses" : {
-          "200" : {
+          "201" : {
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -1279,6 +1279,39 @@
           "BearerAuth" : [ ]
         } ],
         "summary" : "Creates a new user specification for content processing pipeline.",
+        "tags" : [ "Pipeline" ]
+      }
+    },
+    "/pipeline/name" : {
+      "patch" : {
+        "operationId" : "update-pipeline-name",
+        "requestBody" : {
+          "content" : {
+            "application/x-www-form-urlencoded" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestUpdatePipelineName"
+              }
+            },
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestUpdatePipelineName"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "204" : {
+            "description" : "Pipeline name updated successfully."
+          },
+          "404" : {
+            "description" : "No predefined or saved pipeline found with provided ID."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Updates the name of the specified pipeline.",
         "tags" : [ "Pipeline" ]
       }
     }
@@ -1914,6 +1947,11 @@
         "required" : [ "platform" ],
         "type" : "object"
       },
+      "TypePipelineName" : {
+        "description" : "A name to identify the created pipeline for hoomans (intended). The pipeline will be saved under user account with this name. For temporary pipelines, a random name will be generated.",
+        "minLength" : 1,
+        "type" : "string"
+      },
       "TypePipelineMetadata" : {
         "description" : "A metadata object to store additional information about pipeline.",
         "properties" : {
@@ -1921,9 +1959,7 @@
             "$ref" : "#/components/schemas/TypePipelineID"
           },
           "pipelineName" : {
-            "description" : "A name to identify the created pipeline for humans.",
-            "minLength" : 1,
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypePipelineName"
           }
         },
         "required" : [ "pipelineID" ],
@@ -1998,9 +2034,7 @@
             "type" : "boolean"
           },
           "pipelineName" : {
-            "description" : "Name with which the pipeline will be saved under user account. If not provided, a random name will be generated.",
-            "minLength" : 1,
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypePipelineName"
           },
           "pipelineSpecification" : {
             "$ref" : "#/components/schemas/TypePipelineSpecification"
@@ -2030,6 +2064,18 @@
           }
         },
         "required" : [ "pipelineMetadata", "pipelineSpecification" ],
+        "type" : "object"
+      },
+      "RequestUpdatePipelineName" : {
+        "properties" : {
+          "pipelineID" : {
+            "$ref" : "#/components/schemas/TypePipelineID"
+          },
+          "pipelineName" : {
+            "$ref" : "#/components/schemas/TypePipelineName"
+          }
+        },
+        "required" : [ "pipelineID", "pipelineName" ],
         "type" : "object"
       }
     },
