@@ -137,7 +137,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ResponseGetPipeline</a>()</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 <div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Boolean,java.util.List)" class="member-name-link">ResponseGetPipeline</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isPrebuildIncluded,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;&nbsp;pipelines)</code></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;&nbsp;pipelines)</code></div>
 <div class="col-last odd-row-color">
 <div class="block">Constructor with only required parameters and all parameters</div>
 </div>
@@ -156,7 +156,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ResponseGetPipeline.html" title="class in in.devstream.openapi.model">ResponseGetPipeline</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addPipelinesItem(in.devstream.openapi.model.TypeContentPipelineWithID)" class="member-name-link">addPipelinesItem</a><wbr>(<a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&nbsp;pipelinesItem)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#addPipelinesItem(in.devstream.openapi.model.TypePipeline)" class="member-name-link">addPipelinesItem</a><wbr>(<a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&nbsp;pipelinesItem)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code>static <a href="ResponseGetPipeline.Builder.html" title="class in in.devstream.openapi.model">ResponseGetPipeline.Builder</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab1 method-summary-table-tab4"><code><a href="#builder()" class="member-name-link">builder</a>()</code></div>
@@ -171,7 +171,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Boolean value to indicate whether prebuild pipelines are included.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPipelines()" class="member-name-link">getPipelines</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">List of pipelines created by the user as well as prebuild pipelines, if requested.</div>
@@ -183,13 +183,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isPrebuildIncluded(java.lang.Boolean)" class="member-name-link">isPrebuildIncluded</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isPrebuildIncluded)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ResponseGetPipeline.html" title="class in in.devstream.openapi.model">ResponseGetPipeline</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pipelines(java.util.List)" class="member-name-link">pipelines</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;&nbsp;pipelines)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#pipelines(java.util.List)" class="member-name-link">pipelines</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;&nbsp;pipelines)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setIsPrebuildIncluded(java.lang.Boolean)" class="member-name-link">setIsPrebuildIncluded</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isPrebuildIncluded)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPipelines(java.util.List)" class="member-name-link">setPipelines</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;&nbsp;pipelines)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setPipelines(java.util.List)" class="member-name-link">setPipelines</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;&nbsp;pipelines)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ResponseGetPipeline.Builder.html" title="class in in.devstream.openapi.model">ResponseGetPipeline.Builder</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#toBuilder()" class="member-name-link">toBuilder</a>()</code></div>
@@ -226,7 +226,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="&lt;init&gt;(java.lang.Boolean,java.util.List)">
 <h3>ResponseGetPipeline</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ResponseGetPipeline</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;isPrebuildIncluded,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;&nbsp;pipelines)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;&nbsp;pipelines)</span></div>
 <div class="block">Constructor with only required parameters and all parameters</div>
 </section>
 </li>
@@ -265,13 +265,13 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="pipelines(java.util.List)">
 <h3>pipelines</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ResponseGetPipeline.html" title="class in in.devstream.openapi.model">ResponseGetPipeline</a></span>&nbsp;<span class="element-name">pipelines</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;&nbsp;pipelines)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ResponseGetPipeline.html" title="class in in.devstream.openapi.model">ResponseGetPipeline</a></span>&nbsp;<span class="element-name">pipelines</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;&nbsp;pipelines)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="addPipelinesItem(in.devstream.openapi.model.TypeContentPipelineWithID)">
+<section class="detail" id="addPipelinesItem(in.devstream.openapi.model.TypePipeline)">
 <h3>addPipelinesItem</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ResponseGetPipeline.html" title="class in in.devstream.openapi.model">ResponseGetPipeline</a></span>&nbsp;<span class="element-name">addPipelinesItem</span><wbr><span class="parameters">(<a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&nbsp;pipelinesItem)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ResponseGetPipeline.html" title="class in in.devstream.openapi.model">ResponseGetPipeline</a></span>&nbsp;<span class="element-name">addPipelinesItem</span><wbr><span class="parameters">(<a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&nbsp;pipelinesItem)</span></div>
 </section>
 </li>
 <li>
@@ -279,7 +279,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <h3>getPipelines</h3>
 <div class="member-signature"><span class="annotations">@NotNull
 @Valid
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;</span>&nbsp;<span class="element-name">getPipelines</span>()</div>
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;</span>&nbsp;<span class="element-name">getPipelines</span>()</div>
 <div class="block">List of pipelines created by the user as well as prebuild pipelines, if requested.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -290,7 +290,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <li>
 <section class="detail" id="setPipelines(java.util.List)">
 <h3>setPipelines</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPipelines</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt;&nbsp;pipelines)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setPipelines</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt;&nbsp;pipelines)</span></div>
 </section>
 </li>
 <li>

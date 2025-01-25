@@ -146,12 +146,12 @@ loadScripts(document, 'script');</script>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a> isTemporary</pre>
 </li>
 <li class="block-list">
-<h5>pipeline</h5>
-<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/TypeContentPipeline.html" title="class in in.devstream.openapi.model">TypeContentPipeline</a>&gt; pipeline</pre>
-</li>
-<li class="block-list">
 <h5>pipelineName</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;@Size(min=1) <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt; pipelineName</pre>
+</li>
+<li class="block-list">
+<h5>pipelineSpecification</h5>
+<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/TypePipelinePath.html" title="class in in.devstream.openapi.model">TypePipelinePath</a>&gt; pipelineSpecification</pre>
 </li>
 </ul>
 </section>
@@ -179,33 +179,6 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>password</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> password</pre>
-</li>
-</ul>
-</section>
-</li>
-</ul>
-</section>
-</li>
-<li>
-<section class="serialized-class-details" id="in.devstream.openapi.model.RequestModifyPipeline">
-<h3>Class&nbsp;<a href="in/devstream/openapi/model/RequestModifyPipeline.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.RequestModifyPipeline</a></h3>
-<div class="type-signature">class RequestModifyPipeline extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
-<dl class="name-value">
-<dt>serialVersionUID:</dt>
-<dd>1L</dd>
-</dl>
-<ul class="block-list">
-<li>
-<section class="detail">
-<h4>Serialized Fields</h4>
-<ul class="block-list">
-<li class="block-list">
-<h5>pipeline</h5>
-<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/TypeContentPipeline.html" title="class in in.devstream.openapi.model">TypeContentPipeline</a>&gt; pipeline</pre>
-</li>
-<li class="block-list">
-<h5>pipelineID</h5>
-<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&gt; pipelineID</pre>
 </li>
 </ul>
 </section>
@@ -427,6 +400,33 @@ loadScripts(document, 'script');</script>
 <li class="block-list">
 <h5>updatedStatus</h5>
 <pre><a href="in/devstream/openapi/model/TypeContentStatus.html" title="enum class in in.devstream.openapi.model">TypeContentStatus</a> updatedStatus</pre>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<li>
+<section class="serialized-class-details" id="in.devstream.openapi.model.RequestUpdatePipeline">
+<h3>Class&nbsp;<a href="in/devstream/openapi/model/RequestUpdatePipeline.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.RequestUpdatePipeline</a></h3>
+<div class="type-signature">class RequestUpdatePipeline extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<dl class="name-value">
+<dt>serialVersionUID:</dt>
+<dd>1L</dd>
+</dl>
+<ul class="block-list">
+<li>
+<section class="detail">
+<h4>Serialized Fields</h4>
+<ul class="block-list">
+<li class="block-list">
+<h5>pipelineMetadata</h5>
+<pre><a href="in/devstream/openapi/model/TypePipelineMetadata.html" title="class in in.devstream.openapi.model">TypePipelineMetadata</a> pipelineMetadata</pre>
+</li>
+<li class="block-list">
+<h5>pipelineSpecification</h5>
+<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/TypePipelinePath.html" title="class in in.devstream.openapi.model">TypePipelinePath</a>&gt; pipelineSpecification</pre>
 </li>
 </ul>
 </section>
@@ -669,7 +669,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li class="block-list">
 <h5>pipelines</h5>
-<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">TypeContentPipelineWithID</a>&gt; pipelines</pre>
+<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/TypePipeline.html" title="class in in.devstream.openapi.model">TypePipeline</a>&gt; pipelines</pre>
 </li>
 </ul>
 </section>
@@ -1060,7 +1060,7 @@ loadScripts(document, 'script');</script>
 </li>
 <li class="block-list">
 <h5>pipelineID</h5>
-<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a> pipelineID</pre>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a> pipelineID</pre>
 </li>
 <li class="block-list">
 <h5>platforms</h5>
@@ -1077,9 +1077,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="serialized-class-details" id="in.devstream.openapi.model.TypeContentPipeline">
-<h3>Class&nbsp;<a href="in/devstream/openapi/model/TypeContentPipeline.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.TypeContentPipeline</a></h3>
-<div class="type-signature">class TypeContentPipeline extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<section class="serialized-class-details" id="in.devstream.openapi.model.TypePipeline">
+<h3>Class&nbsp;<a href="in/devstream/openapi/model/TypePipeline.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.TypePipeline</a></h3>
+<div class="type-signature">class TypePipeline extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
 <dl class="name-value">
 <dt>serialVersionUID:</dt>
 <dd>1L</dd>
@@ -1090,12 +1090,12 @@ loadScripts(document, 'script');</script>
 <h4>Serialized Fields</h4>
 <ul class="block-list">
 <li class="block-list">
-<h5>platform</h5>
-<pre><a href="in/devstream/openapi/model/TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a> platform</pre>
+<h5>pipelineMetadata</h5>
+<pre><a href="in/devstream/openapi/model/TypePipelineMetadata.html" title="class in in.devstream.openapi.model">TypePipelineMetadata</a> pipelineMetadata</pre>
 </li>
 <li class="block-list">
-<h5>steps</h5>
-<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="in/devstream/openapi/model/TypePipelineStep.html" title="enum class in in.devstream.openapi.model">TypePipelineStep</a>&gt; steps</pre>
+<h5>pipelineSpecification</h5>
+<pre>@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;@Valid <a href="in/devstream/openapi/model/TypePipelinePath.html" title="class in in.devstream.openapi.model">TypePipelinePath</a>&gt; pipelineSpecification</pre>
 </li>
 </ul>
 </section>
@@ -1104,9 +1104,9 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="serialized-class-details" id="in.devstream.openapi.model.TypeContentPipelineWithID">
-<h3>Class&nbsp;<a href="in/devstream/openapi/model/TypeContentPipelineWithID.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.TypeContentPipelineWithID</a></h3>
-<div class="type-signature">class TypeContentPipelineWithID extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<section class="serialized-class-details" id="in.devstream.openapi.model.TypePipelineMetadata">
+<h3>Class&nbsp;<a href="in/devstream/openapi/model/TypePipelineMetadata.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.TypePipelineMetadata</a></h3>
+<div class="type-signature">class TypePipelineMetadata extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
 <dl class="name-value">
 <dt>serialVersionUID:</dt>
 <dd>1L</dd>
@@ -1120,6 +1120,29 @@ loadScripts(document, 'script');</script>
 <h5>pipelineID</h5>
 <pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a> pipelineID</pre>
 </li>
+<li class="block-list">
+<h5>pipelineName</h5>
+<pre><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;@Size(min=1) <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt; pipelineName</pre>
+</li>
+</ul>
+</section>
+</li>
+</ul>
+</section>
+</li>
+<li>
+<section class="serialized-class-details" id="in.devstream.openapi.model.TypePipelinePath">
+<h3>Class&nbsp;<a href="in/devstream/openapi/model/TypePipelinePath.html" title="class in in.devstream.openapi.model">in.devstream.openapi.model.TypePipelinePath</a></h3>
+<div class="type-signature">class TypePipelinePath extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a> implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/io/Serializable.html" title="class or interface in java.io" class="external-link">Serializable</a></div>
+<dl class="name-value">
+<dt>serialVersionUID:</dt>
+<dd>1L</dd>
+</dl>
+<ul class="block-list">
+<li>
+<section class="detail">
+<h4>Serialized Fields</h4>
+<ul class="block-list">
 <li class="block-list">
 <h5>platform</h5>
 <pre><a href="in/devstream/openapi/model/TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a> platform</pre>

@@ -83,17 +83,17 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">RequestCreatePipeline</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/RequestModifyPipeline.html#in.devstream.openapi.api">RequestModifyPipeline</a></div>
+<div class="col-first even-row-color"><a href="class-use/RequestPlatformSync.html#in.devstream.openapi.api">RequestPlatformSync</a></div>
 <div class="col-last even-row-color">
-<div class="block">Request to modify an existing pipeline specification.</div>
-</div>
-<div class="col-first odd-row-color"><a href="class-use/RequestPlatformSync.html#in.devstream.openapi.api">RequestPlatformSync</a></div>
-<div class="col-last odd-row-color">
 <div class="block">Used to sync data with the provided platforms.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/RequestUpdateContentStatusByID.html#in.devstream.openapi.api">RequestUpdateContentStatusByID</a></div>
-<div class="col-last even-row-color">
+<div class="col-first odd-row-color"><a href="class-use/RequestUpdateContentStatusByID.html#in.devstream.openapi.api">RequestUpdateContentStatusByID</a></div>
+<div class="col-last odd-row-color">
 <div class="block">Changes the status of the content with given ID.</div>
+</div>
+<div class="col-first even-row-color"><a href="class-use/RequestUpdatePipeline.html#in.devstream.openapi.api">RequestUpdatePipeline</a></div>
+<div class="col-last even-row-color">
+<div class="block">Request to update an existing pipeline specification.</div>
 </div>
 <div class="col-first odd-row-color"><a href="class-use/RequestUpdateUserProfile.html#in.devstream.openapi.api">RequestUpdateUserProfile</a></div>
 <div class="col-last odd-row-color">
@@ -222,12 +222,6 @@ loadScripts(document, 'script');</script>
 </div>
 <div class="col-first odd-row-color"><a href="class-use/RequestLogin.Builder.html#in.devstream.openapi.model">RequestLogin.Builder</a></div>
 <div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><a href="class-use/RequestModifyPipeline.html#in.devstream.openapi.model">RequestModifyPipeline</a></div>
-<div class="col-last even-row-color">
-<div class="block">Request to modify an existing pipeline specification.</div>
-</div>
-<div class="col-first odd-row-color"><a href="class-use/RequestModifyPipeline.Builder.html#in.devstream.openapi.model">RequestModifyPipeline.Builder</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><a href="class-use/RequestPlatformSync.html#in.devstream.openapi.model">RequestPlatformSync</a></div>
 <div class="col-last even-row-color">
 <div class="block">Used to sync data with the provided platforms.</div>
@@ -269,6 +263,12 @@ loadScripts(document, 'script');</script>
 <div class="block">Changes the status of the content with given ID.</div>
 </div>
 <div class="col-first odd-row-color"><a href="class-use/RequestUpdateContentStatusByID.Builder.html#in.devstream.openapi.model">RequestUpdateContentStatusByID.Builder</a></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><a href="class-use/RequestUpdatePipeline.html#in.devstream.openapi.model">RequestUpdatePipeline</a></div>
+<div class="col-last even-row-color">
+<div class="block">Request to update an existing pipeline specification.</div>
+</div>
+<div class="col-first odd-row-color"><a href="class-use/RequestUpdatePipeline.Builder.html#in.devstream.openapi.model">RequestUpdatePipeline.Builder</a></div>
 <div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><a href="class-use/RequestUpdateUserPassword.html#in.devstream.openapi.model">RequestUpdateUserPassword</a></div>
 <div class="col-last even-row-color">
@@ -404,18 +404,6 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Access permission for the corresponding content.</div>
 </div>
-<div class="col-first even-row-color"><a href="class-use/TypeContentPipeline.html#in.devstream.openapi.model">TypeContentPipeline</a></div>
-<div class="col-last even-row-color">
-<div class="block">TypeContentPipeline</div>
-</div>
-<div class="col-first odd-row-color"><a href="class-use/TypeContentPipeline.Builder.html#in.devstream.openapi.model">TypeContentPipeline.Builder</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
-<div class="col-first even-row-color"><a href="class-use/TypeContentPipelineWithID.html#in.devstream.openapi.model">TypeContentPipelineWithID</a></div>
-<div class="col-last even-row-color">
-<div class="block">TypeContentPipelineWithID</div>
-</div>
-<div class="col-first odd-row-color"><a href="class-use/TypeContentPipelineWithID.Builder.html#in.devstream.openapi.model">TypeContentPipelineWithID.Builder</a></div>
-<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><a href="class-use/TypeContentStatus.html#in.devstream.openapi.model">TypeContentStatus</a></div>
 <div class="col-last even-row-color">
 <div class="block">Current status of the uploaded content</div>
@@ -424,6 +412,24 @@ loadScripts(document, 'script');</script>
 <div class="col-last odd-row-color">
 <div class="block">Gets or Sets TypeHonorifics</div>
 </div>
+<div class="col-first even-row-color"><a href="class-use/TypePipeline.html#in.devstream.openapi.model">TypePipeline</a></div>
+<div class="col-last even-row-color">
+<div class="block">Description of a pipeline, contains a list of objects describing path or sequence of steps to execute for individual pipeline along with pipeline metadata.</div>
+</div>
+<div class="col-first odd-row-color"><a href="class-use/TypePipeline.Builder.html#in.devstream.openapi.model">TypePipeline.Builder</a></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><a href="class-use/TypePipelineMetadata.html#in.devstream.openapi.model">TypePipelineMetadata</a></div>
+<div class="col-last even-row-color">
+<div class="block">A metadata object to store additional information about pipeline.</div>
+</div>
+<div class="col-first odd-row-color"><a href="class-use/TypePipelineMetadata.Builder.html#in.devstream.openapi.model">TypePipelineMetadata.Builder</a></div>
+<div class="col-last odd-row-color">&nbsp;</div>
+<div class="col-first even-row-color"><a href="class-use/TypePipelinePath.html#in.devstream.openapi.model">TypePipelinePath</a></div>
+<div class="col-last even-row-color">
+<div class="block">An object which contains path or sequence of pipeline steps to be followed before publishing the content to a specified platform.</div>
+</div>
+<div class="col-first odd-row-color"><a href="class-use/TypePipelinePath.Builder.html#in.devstream.openapi.model">TypePipelinePath.Builder</a></div>
+<div class="col-last odd-row-color">&nbsp;</div>
 <div class="col-first even-row-color"><a href="class-use/TypePipelineStep.html#in.devstream.openapi.model">TypePipelineStep</a></div>
 <div class="col-last even-row-color">
 <div class="block">Gets or Sets TypePipelineStep</div>
