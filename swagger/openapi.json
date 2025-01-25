@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.56"
+    "version" : "0.3.59"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -1194,7 +1194,7 @@
     "/pipeline" : {
       "get" : {
         "description" : "Get pipelines saved for a particular user. Todo is to decide whether prebuild pipelines are also send alongside user pipelines in this.",
-        "operationId" : "get-pipelines-for-user",
+        "operationId" : "get-pipelines",
         "responses" : {
           "200" : {
             "content" : {
@@ -1206,7 +1206,7 @@
             },
             "description" : "All pipelines defined by a particular user as well as predefined common pipelines."
           },
-          "400" : {
+          "404" : {
             "description" : "No predefined or saved pipeline found."
           }
         },
@@ -1217,12 +1217,12 @@
         "tags" : [ "Pipeline" ]
       },
       "patch" : {
-        "operationId" : "modify-pipeline-specification",
+        "operationId" : "modify-pipeline",
         "requestBody" : {
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/RequestModifyPipeline"
+                "$ref" : "#/components/schemas/RequestUpdatePipeline"
               }
             }
           },
@@ -1249,7 +1249,7 @@
         "tags" : [ "Pipeline" ]
       },
       "post" : {
-        "operationId" : "create-pipeline-specification",
+        "operationId" : "create-pipeline",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -1451,7 +1451,9 @@
         "type" : "string"
       },
       "TypePipelineID" : {
-        "description" : "Identifier to uniquely identify a pipeline.",
+        "description" : "Identifier to uniquely identify a saved pipeline.",
+        "format" : "uuid",
+        "minLength" : 1,
         "type" : "string"
       },
       "TypeSupportedPlatform" : {
@@ -1912,52 +1914,29 @@
         "required" : [ "platform" ],
         "type" : "object"
       },
+      "TypePipelineMetadata" : {
+        "description" : "A metadata object to store additional information about pipeline.",
+        "properties" : {
+          "pipelineID" : {
+            "$ref" : "#/components/schemas/TypePipelineID"
+          },
+          "pipelineName" : {
+            "description" : "A name to identify the created pipeline for humans.",
+            "minLength" : 1,
+            "type" : "string"
+          }
+        },
+        "required" : [ "pipelineID" ],
+        "type" : "object"
+      },
       "TypePipelineStep" : {
         "enum" : [ 0, 1, 2, 3, 4 ],
         "type" : "integer",
         "x-enum-varnames" : [ "ClosedCaptionGeneration", "HashtagsGeneration", "DescriptionGeneration", "VoiceoverGeneration", "SoundTrackGeneration" ],
         "x-enum-descriptions" : [ "Generate Closed Caption", "Generate Hashtags", "Generate Description", "Generate Voiceover", "Generate SoundTrack" ]
       },
-      "TypeContentPipelineWithID" : {
-        "properties" : {
-          "pipelineID" : {
-            "description" : "ID to uniquely identify the saved pipeline.",
-            "format" : "uuid",
-            "type" : "string"
-          },
-          "platform" : {
-            "$ref" : "#/components/schemas/TypeSupportedPlatform"
-          },
-          "steps" : {
-            "items" : {
-              "$ref" : "#/components/schemas/TypePipelineStep"
-            },
-            "type" : "array"
-          }
-        },
-        "required" : [ "pipelineID", "platform", "steps" ],
-        "type" : "object"
-      },
-      "ResponseGetPipeline" : {
-        "description" : "Response to get the pipelines for a particular user. Decide whether prebuild pipelines are also sent alongside user pipelines in this.",
-        "properties" : {
-          "isPrebuildIncluded" : {
-            "default" : true,
-            "description" : "Boolean value to indicate whether prebuild pipelines are included.",
-            "type" : "boolean"
-          },
-          "pipelines" : {
-            "description" : "List of pipelines created by the user as well as prebuild pipelines, if requested.",
-            "items" : {
-              "$ref" : "#/components/schemas/TypeContentPipelineWithID"
-            },
-            "type" : "array"
-          }
-        },
-        "required" : [ "isPrebuildIncluded", "pipelines" ],
-        "type" : "object"
-      },
-      "TypeContentPipeline" : {
+      "TypePipelinePath" : {
+        "description" : "An object which contains path or sequence of pipeline steps to be followed before publishing the content to a specified platform.",
         "properties" : {
           "platform" : {
             "$ref" : "#/components/schemas/TypeSupportedPlatform"
@@ -1972,6 +1951,45 @@
         "required" : [ "platform", "steps" ],
         "type" : "object"
       },
+      "TypePipelineSpecification" : {
+        "description" : "An array containing multiple pipeline paths each for a different supported platform. This array describes the complete pipeline for multiple platforms as each pipeline path contains the description of the steps which should be performed before publishing a content to the respective platform.",
+        "items" : {
+          "$ref" : "#/components/schemas/TypePipelinePath"
+        },
+        "type" : "array"
+      },
+      "TypePipeline" : {
+        "description" : "Description of a pipeline, contains a list of objects describing path or sequence of steps to execute for individual pipeline along with pipeline metadata.",
+        "properties" : {
+          "pipelineMetadata" : {
+            "$ref" : "#/components/schemas/TypePipelineMetadata"
+          },
+          "pipelineSpecification" : {
+            "$ref" : "#/components/schemas/TypePipelineSpecification"
+          }
+        },
+        "required" : [ "pipelineMetadata", "pipelineSpecification" ],
+        "type" : "object"
+      },
+      "ResponseGetPipeline" : {
+        "description" : "Response to get the pipelines for a particular user. Decide whether prebuild pipelines are also sent alongside user pipelines in this.",
+        "properties" : {
+          "isPrebuildIncluded" : {
+            "default" : true,
+            "description" : "Boolean value to indicate whether prebuild pipelines are included.",
+            "type" : "boolean"
+          },
+          "pipelines" : {
+            "description" : "List of pipelines created by the user as well as prebuild pipelines, if requested.",
+            "items" : {
+              "$ref" : "#/components/schemas/TypePipeline"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "isPrebuildIncluded", "pipelines" ],
+        "type" : "object"
+      },
       "RequestCreatePipeline" : {
         "properties" : {
           "isTemporary" : {
@@ -1984,45 +2002,34 @@
             "minLength" : 1,
             "type" : "string"
           },
-          "pipeline" : {
-            "items" : {
-              "$ref" : "#/components/schemas/TypeContentPipeline"
-            },
-            "type" : "array"
+          "pipelineSpecification" : {
+            "$ref" : "#/components/schemas/TypePipelineSpecification"
           }
         },
-        "required" : [ "isTemporary", "pipeline" ],
+        "required" : [ "isTemporary", "pipelineSpecification" ],
         "type" : "object"
       },
       "ResponseCreatePipeline" : {
         "description" : "Response after a particular pipeline is saved in persisting storage. The pipeline can either be saved under a particular user account or as a temporary pipeline specification for processing a single content.",
         "properties" : {
           "pipelineID" : {
-            "description" : "ID to uniquely identify the saved pipeline.",
-            "format" : "uuid",
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypePipelineID"
           }
         },
         "required" : [ "pipelineID" ],
         "type" : "object"
       },
-      "RequestModifyPipeline" : {
-        "description" : "Request to modify an existing pipeline specification.",
+      "RequestUpdatePipeline" : {
+        "description" : "Request to update an existing pipeline specification.",
         "properties" : {
-          "pipelineID" : {
-            "description" : "ID of the pipeline to be modified.",
-            "format" : "uuid",
-            "type" : "string"
+          "pipelineMetadata" : {
+            "$ref" : "#/components/schemas/TypePipelineMetadata"
           },
-          "pipeline" : {
-            "description" : "New pipeline specification to replace the existing one.",
-            "items" : {
-              "$ref" : "#/components/schemas/TypeContentPipeline"
-            },
-            "type" : "array"
+          "pipelineSpecification" : {
+            "$ref" : "#/components/schemas/TypePipelineSpecification"
           }
         },
-        "required" : [ "pipeline" ],
+        "required" : [ "pipelineMetadata", "pipelineSpecification" ],
         "type" : "object"
       }
     },
