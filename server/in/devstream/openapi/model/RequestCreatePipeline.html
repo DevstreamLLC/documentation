@@ -180,7 +180,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a><wbr>&lt;@Size(min=1) <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPipelineName()" class="member-name-link">getPipelineName</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
-<div class="block">Name with which the pipeline will be saved under user account.</div>
+<div class="block">A name to identify the created pipeline for hoomans (intended).</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a><wbr>&lt;@Valid <a href="TypePipelinePath.html" title="class in in.devstream.openapi.model">TypePipelinePath</a>&gt;</code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getPipelineSpecification()" class="member-name-link">getPipelineSpecification</a>()</code></div>
@@ -329,7 +329,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <section class="detail" id="getPipelineName()">
 <h3>getPipelineName</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;@Size(min=1) <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;</span>&nbsp;<span class="element-name">getPipelineName</span>()</div>
-<div class="block">Name with which the pipeline will be saved under user account. If not provided, a random name will be generated.</div>
+<div class="block">A name to identify the created pipeline for hoomans (intended). The pipeline will be saved under user account with this name. For temporary pipelines, a random name will be generated.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>pipelineName</dd>
