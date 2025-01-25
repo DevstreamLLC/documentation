@@ -1197,6 +1197,13 @@
         "operationId" : "get-pipelines-for-user",
         "responses" : {
           "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseGetPipeline"
+                }
+              }
+            },
             "description" : "All pipelines defined by a particular user as well as predefined common pipelines."
           },
           "400" : {
@@ -1207,6 +1214,38 @@
           "BearerAuth" : [ ]
         } ],
         "summary" : "Gets all the pipelines created by the user as well as predefined pipelines.",
+        "tags" : [ "Pipeline" ]
+      },
+      "patch" : {
+        "operationId" : "modify-pipeline-specification",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/RequestModifyPipeline"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Pipeline specification modified successfully."
+          },
+          "400" : {
+            "description" : "Bad Request, invalid inputs."
+          },
+          "401" : {
+            "description" : "Unauthorized. Authentication required to update pipeline."
+          },
+          "404" : {
+            "description" : "Not found. The pipeline does not exist."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Modify a new user specification for content processing pipeline.",
         "tags" : [ "Pipeline" ]
       },
       "post" : {
@@ -1879,6 +1918,45 @@
         "x-enum-varnames" : [ "ClosedCaptionGeneration", "HashtagsGeneration", "DescriptionGeneration", "VoiceoverGeneration", "SoundTrackGeneration" ],
         "x-enum-descriptions" : [ "Generate Closed Caption", "Generate Hashtags", "Generate Description", "Generate Voiceover", "Generate SoundTrack" ]
       },
+      "TypeContentPipelineWithID" : {
+        "properties" : {
+          "pipelineID" : {
+            "description" : "ID to uniquely identify the saved pipeline.",
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "platform" : {
+            "$ref" : "#/components/schemas/TypeSupportedPlatform"
+          },
+          "steps" : {
+            "items" : {
+              "$ref" : "#/components/schemas/TypePipelineStep"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "pipelineID", "platform", "steps" ],
+        "type" : "object"
+      },
+      "ResponseGetPipeline" : {
+        "description" : "Response to get the pipelines for a particular user. Decide whether prebuild pipelines are also sent alongside user pipelines in this.",
+        "properties" : {
+          "isPrebuildIncluded" : {
+            "default" : true,
+            "description" : "Boolean value to indicate whether prebuild pipelines are included.",
+            "type" : "boolean"
+          },
+          "pipelines" : {
+            "description" : "List of pipelines created by the user as well as prebuild pipelines, if requested.",
+            "items" : {
+              "$ref" : "#/components/schemas/TypeContentPipelineWithID"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "isPrebuildIncluded", "pipelines" ],
+        "type" : "object"
+      },
       "TypeContentPipeline" : {
         "properties" : {
           "platform" : {
@@ -1926,6 +2004,25 @@
           }
         },
         "required" : [ "pipelineID" ],
+        "type" : "object"
+      },
+      "RequestModifyPipeline" : {
+        "description" : "Request to modify an existing pipeline specification.",
+        "properties" : {
+          "pipelineID" : {
+            "description" : "ID of the pipeline to be modified.",
+            "format" : "uuid",
+            "type" : "string"
+          },
+          "pipeline" : {
+            "description" : "New pipeline specification to replace the existing one.",
+            "items" : {
+              "$ref" : "#/components/schemas/TypeContentPipeline"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "pipeline" ],
         "type" : "object"
       }
     },
