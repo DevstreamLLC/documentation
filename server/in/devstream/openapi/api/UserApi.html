@@ -106,25 +106,15 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-first">Modifier and Type</div>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponsePreSignedURL.html" title="class in in.devstream.openapi.model">ResponsePreSignedURL</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#createUserContent()" class="member-name-link">createUserContent</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deactivateUserAccount()" class="member-name-link">deactivateUserAccount</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">POST /user/content : Publish content for the user.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deactivateUserAccount()" class="member-name-link">deactivateUserAccount</a>()</code></div>
-<div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">DELETE /user/deactivate : Deactivates the current user account.</div>
 </div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetUserAnalytics.html" title="class in in.devstream.openapi.model">ResponseGetUserAnalytics</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserAnalytics()" class="member-name-link">getUserAnalytics</a>()</code></div>
-<div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">GET /user/analytics : View overall analytics for the user.</div>
-</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetUserContent.html" title="class in in.devstream.openapi.model">ResponseGetUserContent</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserContent(java.util.Optional)" class="member-name-link">getUserContent</a><wbr>(@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;filter)</code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetUserAnalytics.html" title="class in in.devstream.openapi.model">ResponseGetUserAnalytics</a>&gt;</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserAnalytics()" class="member-name-link">getUserAnalytics</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
-<div class="block">GET /user/content : List all user content with optional filters.</div>
+<div class="block">GET /user/analytics : View overall analytics for the user.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetUserProfile.html" title="class in in.devstream.openapi.model">ResponseGetUserProfile</a>&gt;</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getUserProfileInformation()" class="member-name-link">getUserProfileInformation</a>()</code></div>
@@ -167,22 +157,6 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="createUserContent()">
-<h3>createUserContent</h3>
-<div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
-                value="/user/content",
-                produces="application/json")
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponsePreSignedURL.html" title="class in in.devstream.openapi.model">ResponsePreSignedURL</a>&gt;</span>&nbsp;<span class="element-name">createUserContent</span>()</div>
-<div class="block">POST /user/content : Publish content for the user.
- On successful completion of this request, the response contents a pre signed url in which the user needs to upload the content. On successful completion of document update, it&#39;s responsibility of the document uploading server to notify the application server that the content has been uploaded.</div>
-<dl class="notes">
-<dt>Returns:</dt>
-<dd>Contents the generated pre signed URL, on which the client has to upload the content. (status code 200)
-         or Invalid parameters for getting presigned URL. (status code 400)</dd>
-</dl>
-</section>
-</li>
-<li>
 <section class="detail" id="deactivateUserAccount()">
 <h3>deactivateUserAccount</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=DELETE,
@@ -210,25 +184,6 @@ loadScripts(document, 'script');</script>
          or Bad request. Invalid request format or parameters. (status code 400)
          or Unauthorized. Authentication required to view analytics. (status code 401)
          or Not found. User analytics data does not exist. (status code 404)</dd>
-</dl>
-</section>
-</li>
-<li>
-<section class="detail" id="getUserContent(java.util.Optional)">
-<h3>getUserContent</h3>
-<div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
-                value="/user/content",
-                produces="application/json")
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseGetUserContent.html" title="class in in.devstream.openapi.model">ResponseGetUserContent</a>&gt;</span>&nbsp;<span class="element-name">getUserContent</span><wbr><span class="parameters">(@Valid @RequestParam(value="filter",required=false)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;filter)</span></div>
-<div class="block">GET /user/content : List all user content with optional filters.</div>
-<dl class="notes">
-<dt>Parameters:</dt>
-<dd><code>filter</code> - Filter content (e.g., by date or platform). (optional)</dd>
-<dt>Returns:</dt>
-<dd>List of content retrieved successfully. (status code 200)
-         or Bad request. Invalid filter parameters. (status code 400)
-         or No content found for the given filters. (status code 404)</dd>
 </dl>
 </section>
 </li>

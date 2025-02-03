@@ -80,6 +80,20 @@ loadScripts(document, 'script');</script>
 <div class="block">DELETE /platforms/{PlatformID} : Disconnect an existing platform.</div>
 </div>
 </div>
+<div class="caption"><span>Method parameters in <a href="../../api/package-summary.html">in.devstream.openapi.api</a> with type arguments of type <a href="../TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a></span></div>
+<div class="summary-table three-column-summary">
+<div class="table-header col-first">Modifier and Type</div>
+<div class="table-header col-second">Method</div>
+<div class="table-header col-last">Description</div>
+<div class="col-first even-row-color"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../ResponseGetUserContent.html" title="class in in.devstream.openapi.model">ResponseGetUserContent</a>&gt;</code></div>
+<div class="col-second even-row-color"><span class="type-name-label">ContentApi.</span><code><a href="../../api/ContentApi.html#getAllContent(java.util.Optional,java.util.Optional,java.util.Optional,java.util.Optional)" class="member-name-link">getAllContent</a><wbr>(@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../TypeSupportedPlatform.html" title="enum class in in.devstream.openapi.model">TypeSupportedPlatform</a>&gt;&nbsp;platform,
+ @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&nbsp;title,
+ @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&gt;&nbsp;publishedOn,
+ @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/List.html" title="class or interface in java.util" class="external-link">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&gt;&gt;&nbsp;hashtags)</code></div>
+<div class="col-last even-row-color">
+<div class="block">GET /content : List all contents for the currently authenticated user.</div>
+</div>
+</div>
 </section>
 </li>
 <li>

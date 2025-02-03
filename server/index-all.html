@@ -739,13 +739,13 @@ loadScripts(document, 'script');</script>
 <dd>&nbsp;</dd>
 <dt><a href="in/devstream/openapi/model/TypeUserContentAccessControl.Builder.html#copyOf(in.devstream.openapi.model.TypeUserContentAccessControl)" class="member-name-link">copyOf(TypeUserContentAccessControl)</a> - Method in class in.devstream.openapi.model.<a href="in/devstream/openapi/model/TypeUserContentAccessControl.Builder.html" title="class in in.devstream.openapi.model">TypeUserContentAccessControl.Builder</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="in/devstream/openapi/api/ContentApi.html#createContent()" class="member-name-link">createContent()</a> - Method in interface in.devstream.openapi.api.<a href="in/devstream/openapi/api/ContentApi.html" title="interface in in.devstream.openapi.api">ContentApi</a></dt>
+<dd>
+<div class="block">POST /content : Publish content for the currently authenticated user.</div>
+</dd>
 <dt><a href="in/devstream/openapi/api/PipelineApi.html#createPipeline(in.devstream.openapi.model.RequestCreatePipeline)" class="member-name-link">createPipeline(RequestCreatePipeline)</a> - Method in interface in.devstream.openapi.api.<a href="in/devstream/openapi/api/PipelineApi.html" title="interface in in.devstream.openapi.api">PipelineApi</a></dt>
 <dd>
 <div class="block">POST /pipeline : Creates a new user specification for content processing pipeline.</div>
-</dd>
-<dt><a href="in/devstream/openapi/api/UserApi.html#createUserContent()" class="member-name-link">createUserContent()</a> - Method in interface in.devstream.openapi.api.<a href="in/devstream/openapi/api/UserApi.html" title="interface in in.devstream.openapi.api">UserApi</a></dt>
-<dd>
-<div class="block">POST /user/content : Publish content for the user.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:D">D</h2>
@@ -960,6 +960,10 @@ loadScripts(document, 'script');</script>
 <dt><a href="in/devstream/openapi/model/ResponseSuccessMessage.html#getAdditionalProperty(java.lang.String)" class="member-name-link">getAdditionalProperty(String)</a> - Method in class in.devstream.openapi.model.<a href="in/devstream/openapi/model/ResponseSuccessMessage.html" title="class in in.devstream.openapi.model">ResponseSuccessMessage</a></dt>
 <dd>
 <div class="block">Return the additional (undeclared) property with the specified name.</div>
+</dd>
+<dt><a href="in/devstream/openapi/api/ContentApi.html#getAllContent(java.util.Optional,java.util.Optional,java.util.Optional,java.util.Optional)" class="member-name-link">getAllContent(Optional&lt;TypeSupportedPlatform&gt;, Optional&lt;String&gt;, Optional&lt;LocalDate&gt;, Optional&lt;List&lt;String&gt;&gt;)</a> - Method in interface in.devstream.openapi.api.<a href="in/devstream/openapi/api/ContentApi.html" title="interface in in.devstream.openapi.api">ContentApi</a></dt>
+<dd>
+<div class="block">GET /content : List all contents for the currently authenticated user.</div>
 </dd>
 <dt><a href="in/devstream/openapi/model/ResponseGetContentAnalyticsByID.html#getAnalytics()" class="member-name-link">getAnalytics()</a> - Method in class in.devstream.openapi.model.<a href="in/devstream/openapi/model/ResponseGetContentAnalyticsByID.html" title="class in in.devstream.openapi.model">ResponseGetContentAnalyticsByID</a></dt>
 <dd>
@@ -1364,10 +1368,6 @@ loadScripts(document, 'script');</script>
 <dt><a href="in/devstream/openapi/api/UserApi.html#getUserAnalytics()" class="member-name-link">getUserAnalytics()</a> - Method in interface in.devstream.openapi.api.<a href="in/devstream/openapi/api/UserApi.html" title="interface in in.devstream.openapi.api">UserApi</a></dt>
 <dd>
 <div class="block">GET /user/analytics : View overall analytics for the user.</div>
-</dd>
-<dt><a href="in/devstream/openapi/api/UserApi.html#getUserContent(java.util.Optional)" class="member-name-link">getUserContent(Optional&lt;String&gt;)</a> - Method in interface in.devstream.openapi.api.<a href="in/devstream/openapi/api/UserApi.html" title="interface in in.devstream.openapi.api">UserApi</a></dt>
-<dd>
-<div class="block">GET /user/content : List all user content with optional filters.</div>
 </dd>
 <dt><a href="in/devstream/openapi/model/ResponseGetUserAnalytics.html#getUserID()" class="member-name-link">getUserID()</a> - Method in class in.devstream.openapi.model.<a href="in/devstream/openapi/model/ResponseGetUserAnalytics.html" title="class in in.devstream.openapi.model">ResponseGetUserAnalytics</a></dt>
 <dd>
