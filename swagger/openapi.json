@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.62"
+    "version" : "0.3.63"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -241,69 +241,6 @@
           "BearerAuth" : [ ]
         } ],
         "summary" : "Deactivates the current user account.",
-        "tags" : [ "User" ]
-      }
-    },
-    "/user/content" : {
-      "get" : {
-        "operationId" : "get-user-content",
-        "parameters" : [ {
-          "description" : "Filter content (e.g., by date or platform).",
-          "explode" : true,
-          "in" : "query",
-          "name" : "filter",
-          "required" : false,
-          "schema" : {
-            "type" : "string"
-          },
-          "style" : "form"
-        } ],
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResponseGetUserContent"
-                }
-              }
-            },
-            "description" : "List of content retrieved successfully."
-          },
-          "400" : {
-            "description" : "Bad request. Invalid filter parameters."
-          },
-          "404" : {
-            "description" : "No content found for the given filters."
-          }
-        },
-        "security" : [ {
-          "BearerAuth" : [ ]
-        } ],
-        "summary" : "List all user content with optional filters.",
-        "tags" : [ "User" ]
-      },
-      "post" : {
-        "description" : "On successful completion of this request, the response contents a pre signed url in which the user needs to upload the content. On successful completion of document update, it's responsibility of the document uploading server to notify the application server that the content has been uploaded.",
-        "operationId" : "create-user-content",
-        "responses" : {
-          "200" : {
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResponsePreSignedURL"
-                }
-              }
-            },
-            "description" : "Contents the generated pre signed URL, on which the client has to upload the content."
-          },
-          "400" : {
-            "description" : "Invalid parameters for getting presigned URL."
-          }
-        },
-        "security" : [ {
-          "BearerAuth" : [ ]
-        } ],
-        "summary" : "Publish content for the user.",
         "tags" : [ "User" ]
       }
     },
@@ -731,6 +668,99 @@
         "security" : [ ],
         "summary" : "Resets the user's password using the recovery challenge token and new password.",
         "tags" : [ "Recovery" ]
+      }
+    },
+    "/content" : {
+      "get" : {
+        "operationId" : "get-all-content",
+        "parameters" : [ {
+          "explode" : true,
+          "in" : "query",
+          "name" : "platform",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/components/schemas/TypeSupportedPlatform"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "title",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "publishedOn",
+          "required" : false,
+          "schema" : {
+            "format" : "date",
+            "type" : "string"
+          },
+          "style" : "form"
+        }, {
+          "explode" : true,
+          "in" : "query",
+          "name" : "hashtags",
+          "required" : false,
+          "schema" : {
+            "items" : {
+              "type" : "string"
+            },
+            "type" : "array"
+          },
+          "style" : "form"
+        } ],
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseGetUserContent"
+                }
+              }
+            },
+            "description" : "List of content retrieved successfully."
+          },
+          "400" : {
+            "description" : "Bad request. Invalid filter parameters."
+          },
+          "404" : {
+            "description" : "No content found for the given filters."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "List all contents for the currently authenticated user.",
+        "tags" : [ "Content" ]
+      },
+      "post" : {
+        "description" : "On successful completion of this request, the response contents a pre signed url in which the user needs to upload the content. On successful completion of document update, it's responsibility of the document uploading server to notify the application server that the content has been uploaded.",
+        "operationId" : "create-content",
+        "responses" : {
+          "200" : {
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponsePreSignedURL"
+                }
+              }
+            },
+            "description" : "Contents the generated pre signed URL, on which the client has to upload the content."
+          },
+          "400" : {
+            "description" : "Invalid parameters for getting presigned URL."
+          }
+        },
+        "security" : [ {
+          "BearerAuth" : [ ]
+        } ],
+        "summary" : "Publish content for the currently authenticated user.",
+        "tags" : [ "Content" ]
       }
     },
     "/content/{ContentID}" : {
@@ -1478,73 +1508,6 @@
         "required" : [ "totalContent", "totalViews", "userID" ],
         "type" : "object"
       },
-      "TypeContentID" : {
-        "description" : "ID of the uploaded content",
-        "example" : "acde070d-8c4c-4f0d-9d8a-162843c10333",
-        "type" : "string"
-      },
-      "TypePipelineID" : {
-        "description" : "Identifier to uniquely identify a saved pipeline.",
-        "format" : "uuid",
-        "minLength" : 1,
-        "type" : "string"
-      },
-      "TypeSupportedPlatform" : {
-        "description" : "List of supported platforms.",
-        "enum" : [ "Facebook", "LinkedIn", "Twitter", "Instagram", "TikTok", "Reddit", "SnapChat", "YouTube" ],
-        "type" : "string"
-      },
-      "TypeContentDetails" : {
-        "properties" : {
-          "contentID" : {
-            "$ref" : "#/components/schemas/TypeContentID"
-          },
-          "pipelineID" : {
-            "$ref" : "#/components/schemas/TypePipelineID"
-          },
-          "title" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "platforms" : {
-            "description" : "List of platforms on which the content is published.",
-            "items" : {
-              "$ref" : "#/components/schemas/TypeSupportedPlatform"
-            },
-            "type" : "array"
-          }
-        },
-        "required" : [ "contentID", "description", "pipelineID", "platforms", "title" ],
-        "type" : "object"
-      },
-      "ResponseGetUserContent" : {
-        "properties" : {
-          "contents" : {
-            "items" : {
-              "$ref" : "#/components/schemas/TypeContentDetails"
-            },
-            "type" : "array"
-          }
-        },
-        "required" : [ "contents" ],
-        "type" : "object"
-      },
-      "ResponsePreSignedURL" : {
-        "properties" : {
-          "contentID" : {
-            "$ref" : "#/components/schemas/TypeContentID"
-          },
-          "preSignedURL" : {
-            "description" : "Presigned URL to upload the content with specified ID into the object storage.",
-            "format" : "uri",
-            "type" : "string"
-          }
-        },
-        "required" : [ "contentID", "preSignedURL" ],
-        "type" : "object"
-      },
       "RequestUpdateUserPassword" : {
         "properties" : {
           "oldPassword" : {
@@ -1820,6 +1783,73 @@
             "type" : "string"
           }
         },
+        "type" : "object"
+      },
+      "TypeSupportedPlatform" : {
+        "description" : "List of supported platforms.",
+        "enum" : [ "Facebook", "LinkedIn", "Twitter", "Instagram", "TikTok", "Reddit", "SnapChat", "YouTube" ],
+        "type" : "string"
+      },
+      "TypeContentID" : {
+        "description" : "ID of the uploaded content",
+        "example" : "acde070d-8c4c-4f0d-9d8a-162843c10333",
+        "type" : "string"
+      },
+      "TypePipelineID" : {
+        "description" : "Identifier to uniquely identify a saved pipeline.",
+        "format" : "uuid",
+        "minLength" : 1,
+        "type" : "string"
+      },
+      "TypeContentDetails" : {
+        "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/TypeContentID"
+          },
+          "pipelineID" : {
+            "$ref" : "#/components/schemas/TypePipelineID"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "platforms" : {
+            "description" : "List of platforms on which the content is published.",
+            "items" : {
+              "$ref" : "#/components/schemas/TypeSupportedPlatform"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "contentID", "description", "pipelineID", "platforms", "title" ],
+        "type" : "object"
+      },
+      "ResponseGetUserContent" : {
+        "properties" : {
+          "contents" : {
+            "items" : {
+              "$ref" : "#/components/schemas/TypeContentDetails"
+            },
+            "type" : "array"
+          }
+        },
+        "required" : [ "contents" ],
+        "type" : "object"
+      },
+      "ResponsePreSignedURL" : {
+        "properties" : {
+          "contentID" : {
+            "$ref" : "#/components/schemas/TypeContentID"
+          },
+          "preSignedURL" : {
+            "description" : "Presigned URL to upload the content with specified ID into the object storage.",
+            "format" : "uri",
+            "type" : "string"
+          }
+        },
+        "required" : [ "contentID", "preSignedURL" ],
         "type" : "object"
       },
       "TypeContentStatus" : {
