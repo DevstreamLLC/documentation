@@ -121,8 +121,8 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="table-header col-last">Description</div>
 <div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E()" class="member-name-link">ResponseLogin</a>()</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
-<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Boolean,java.lang.String,java.time.OffsetDateTime,byte%5B%5D,byte%5B%5D)" class="member-name-link">ResponseLogin</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;requiresTwoFactorAuth,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;loginAttemptID,
+<div class="col-constructor-name odd-row-color"><code><a href="#%3Cinit%3E(java.lang.Boolean,java.util.UUID,java.time.OffsetDateTime,byte%5B%5D,byte%5B%5D)" class="member-name-link">ResponseLogin</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;requiresTwoFactorAuth,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" title="class or interface in java.time" class="external-link">OffsetDateTime</a>&nbsp;loginAttemptTimeStamp,
  byte[]&nbsp;accessToken,
  byte[]&nbsp;refreshToken)</code></div>
@@ -154,7 +154,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Get accessToken</div>
 </div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getLoginAttemptID()" class="member-name-link">getLoginAttemptID</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">This is to keep track of which login attempt will be validated using the two factor authentication OTP.</div>
@@ -178,7 +178,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#hashCode()" class="member-name-link">hashCode</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loginAttemptID(java.lang.String)" class="member-name-link">loginAttemptID</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;loginAttemptID)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loginAttemptID(java.util.UUID)" class="member-name-link">loginAttemptID</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#loginAttemptTimeStamp(java.time.OffsetDateTime)" class="member-name-link">loginAttemptTimeStamp</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" title="class or interface in java.time" class="external-link">OffsetDateTime</a>&nbsp;loginAttemptTimeStamp)</code></div>
@@ -193,7 +193,7 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setAccessToken(byte%5B%5D)" class="member-name-link">setAccessToken</a><wbr>(byte[]&nbsp;accessToken)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLoginAttemptID(java.lang.String)" class="member-name-link">setLoginAttemptID</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;loginAttemptID)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLoginAttemptID(java.util.UUID)" class="member-name-link">setLoginAttemptID</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>void</code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#setLoginAttemptTimeStamp(java.time.OffsetDateTime)" class="member-name-link">setLoginAttemptTimeStamp</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" title="class or interface in java.time" class="external-link">OffsetDateTime</a>&nbsp;loginAttemptTimeStamp)</code></div>
@@ -231,10 +231,10 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 </section>
 </li>
 <li>
-<section class="detail" id="&lt;init&gt;(java.lang.Boolean,java.lang.String,java.time.OffsetDateTime,byte[],byte[])">
+<section class="detail" id="&lt;init&gt;(java.lang.Boolean,java.util.UUID,java.time.OffsetDateTime,byte[],byte[])">
 <h3>ResponseLogin</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ResponseLogin</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;requiresTwoFactorAuth,
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;loginAttemptID,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID,
  <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/OffsetDateTime.html" title="class or interface in java.time" class="external-link">OffsetDateTime</a>&nbsp;loginAttemptTimeStamp,
  byte[]&nbsp;accessToken,
  byte[]&nbsp;refreshToken)</span></div>
@@ -274,16 +274,17 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 </section>
 </li>
 <li>
-<section class="detail" id="loginAttemptID(java.lang.String)">
+<section class="detail" id="loginAttemptID(java.util.UUID)">
 <h3>loginAttemptID</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a></span>&nbsp;<span class="element-name">loginAttemptID</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;loginAttemptID)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a></span>&nbsp;<span class="element-name">loginAttemptID</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID)</span></div>
 </section>
 </li>
 <li>
 <section class="detail" id="getLoginAttemptID()">
 <h3>getLoginAttemptID</h3>
 <div class="member-signature"><span class="annotations">@NotNull
-</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a></span>&nbsp;<span class="element-name">getLoginAttemptID</span>()</div>
+@Valid
+</span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a></span>&nbsp;<span class="element-name">getLoginAttemptID</span>()</div>
 <div class="block">This is to keep track of which login attempt will be validated using the two factor authentication OTP.</div>
 <dl class="notes">
 <dt>Returns:</dt>
@@ -292,9 +293,9 @@ implements <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base
 </section>
 </li>
 <li>
-<section class="detail" id="setLoginAttemptID(java.lang.String)">
+<section class="detail" id="setLoginAttemptID(java.util.UUID)">
 <h3>setLoginAttemptID</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setLoginAttemptID</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;loginAttemptID)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">setLoginAttemptID</span><wbr><span class="parameters">(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID)</span></div>
 </section>
 </li>
 <li>

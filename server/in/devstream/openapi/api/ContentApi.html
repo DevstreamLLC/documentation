@@ -107,7 +107,7 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#contentUploadFinished(java.lang.String)" class="member-name-link">contentUploadFinished</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#contentUploadFinished(java.util.UUID)" class="member-name-link">contentUploadFinished</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /content/upload-finish/{ContentID} : Handle content processing after upload finishes.</div>
 </div>
@@ -117,7 +117,7 @@ loadScripts(document, 'script');</script>
 <div class="block">POST /content : Publish content for the currently authenticated user.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteContentById(java.lang.String)" class="member-name-link">deleteContentById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#deleteContentById(java.util.UUID)" class="member-name-link">deleteContentById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">DELETE /content/{ContentID} : Delete a specific piece of content.</div>
 </div>
@@ -130,40 +130,40 @@ loadScripts(document, 'script');</script>
 <div class="block">GET /content : List all contents for the currently authenticated user.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetContentAnalyticsByID.html" title="class in in.devstream.openapi.model">ResponseGetContentAnalyticsByID</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentAnalytics(java.lang.String)" class="member-name-link">getContentAnalytics</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentAnalytics(java.util.UUID)" class="member-name-link">getContentAnalytics</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /content/analytics/{ContentID} : View analytics for a specific piece of content.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/TypeContentDetails.html" title="class in in.devstream.openapi.model">TypeContentDetails</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentById(java.lang.String)" class="member-name-link">getContentById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentById(java.util.UUID)" class="member-name-link">getContentById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /content/{ContentID} : Retrieve details for a specific piece of content.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentCollaborationById(java.lang.String,java.util.Optional)" class="member-name-link">getContentCollaborationById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentCollaborationById(java.util.UUID,java.util.Optional)" class="member-name-link">getContentCollaborationById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../model/TypeCollaborationStatus.html" title="enum class in in.devstream.openapi.model">TypeCollaborationStatus</a>&gt;&nbsp;status)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /content/collaboration/{ContentID} : Get all collaboration requests for a particular content</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseGetContentStatusByID.html" title="class in in.devstream.openapi.model">ResponseGetContentStatusByID</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentStatusById(java.lang.String)" class="member-name-link">getContentStatusById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#getContentStatusById(java.util.UUID)" class="member-name-link">getContentStatusById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">GET /content/status/{ContentID} : Check the status of a specific piece of content.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sendCollaborationInvitations(java.lang.String,in.devstream.openapi.model.RequestCollaboration)" class="member-name-link">sendCollaborationInvitations</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#sendCollaborationInvitations(java.util.UUID,in.devstream.openapi.model.RequestCollaboration)" class="member-name-link">sendCollaborationInvitations</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid <a href="../model/RequestCollaboration.html" title="class in in.devstream.openapi.model">RequestCollaboration</a>&nbsp;requestCollaboration)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">POST /content/collaboration/{ContentID} : Invite users to collaborate on content.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateContentStatusById(java.lang.String,in.devstream.openapi.model.RequestUpdateContentStatusByID)" class="member-name-link">updateContentStatusById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updateContentStatusById(java.util.UUID,in.devstream.openapi.model.RequestUpdateContentStatusByID)" class="member-name-link">updateContentStatusById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid <a href="../model/RequestUpdateContentStatusByID.html" title="class in in.devstream.openapi.model">RequestUpdateContentStatusByID</a>&nbsp;requestUpdateContentStatusByID)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">PATCH /content/status/{ContentID} : Changes content status for a particular content.</div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updatePendingInvitesForContentById(java.lang.String,in.devstream.openapi.model.RequestCollaborationAction)" class="member-name-link">updatePendingInvitesForContentById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#updatePendingInvitesForContentById(java.util.UUID,in.devstream.openapi.model.RequestCollaborationAction)" class="member-name-link">updatePendingInvitesForContentById</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid <a href="../model/RequestCollaborationAction.html" title="class in in.devstream.openapi.model">RequestCollaborationAction</a>&nbsp;requestCollaborationAction)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">PATCH /content/collaboration/{ContentID} : Accept or decline invitations.</div>
@@ -183,12 +183,12 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="contentUploadFinished(java.lang.String)">
+<section class="detail" id="contentUploadFinished(java.util.UUID)">
 <h3>contentUploadFinished</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/content/upload-finish/{ContentID}")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">contentUploadFinished</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</span></div>
 <div class="block">GET /content/upload-finish/{ContentID} : Handle content processing after upload finishes.
  After the upload has been finished in the object storage, the storage server will ping this endpoint with the content id. This endpoint will change the status of the content from uploading to processing and then further process the content stored in the object store. Note that this endpoint also changes the status of the content.</div>
 <dl class="notes">
@@ -218,12 +218,12 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="deleteContentById(java.lang.String)">
+<section class="detail" id="deleteContentById(java.util.UUID)">
 <h3>deleteContentById</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=DELETE,
                 value="/content/{ContentID}")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">deleteContentById</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</span></div>
 <div class="block">DELETE /content/{ContentID} : Delete a specific piece of content.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -266,13 +266,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getContentAnalytics(java.lang.String)">
+<section class="detail" id="getContentAnalytics(java.util.UUID)">
 <h3>getContentAnalytics</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/content/analytics/{ContentID}",
                 produces="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseGetContentAnalyticsByID.html" title="class in in.devstream.openapi.model">ResponseGetContentAnalyticsByID</a>&gt;</span>&nbsp;<span class="element-name">getContentAnalytics</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</span></div>
 <div class="block">GET /content/analytics/{ContentID} : View analytics for a specific piece of content.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -287,13 +287,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getContentById(java.lang.String)">
+<section class="detail" id="getContentById(java.util.UUID)">
 <h3>getContentById</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/content/{ContentID}",
                 produces="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/TypeContentDetails.html" title="class in in.devstream.openapi.model">TypeContentDetails</a>&gt;</span>&nbsp;<span class="element-name">getContentById</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</span></div>
 <div class="block">GET /content/{ContentID} : Retrieve details for a specific piece of content.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -308,12 +308,12 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getContentCollaborationById(java.lang.String,java.util.Optional)">
+<section class="detail" id="getContentCollaborationById(java.util.UUID,java.util.Optional)">
 <h3>getContentCollaborationById</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/content/collaboration/{ContentID}")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">getContentCollaborationById</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid @RequestParam(value="status",required=false)
  @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Optional.html" title="class or interface in java.util" class="external-link">Optional</a>&lt;<a href="../model/TypeCollaborationStatus.html" title="enum class in in.devstream.openapi.model">TypeCollaborationStatus</a>&gt;&nbsp;status)</span></div>
 <div class="block">GET /content/collaboration/{ContentID} : Get all collaboration requests for a particular content</div>
@@ -329,13 +329,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="getContentStatusById(java.lang.String)">
+<section class="detail" id="getContentStatusById(java.util.UUID)">
 <h3>getContentStatusById</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=GET,
                 value="/content/status/{ContentID}",
                 produces="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseGetContentStatusByID.html" title="class in in.devstream.openapi.model">ResponseGetContentStatusByID</a>&gt;</span>&nbsp;<span class="element-name">getContentStatusById</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID)</span></div>
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID)</span></div>
 <div class="block">GET /content/status/{ContentID} : Check the status of a specific piece of content.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
@@ -348,13 +348,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="sendCollaborationInvitations(java.lang.String,in.devstream.openapi.model.RequestCollaboration)">
+<section class="detail" id="sendCollaborationInvitations(java.util.UUID,in.devstream.openapi.model.RequestCollaboration)">
 <h3>sendCollaborationInvitations</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
                 value="/content/collaboration/{ContentID}",
                 consumes="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">sendCollaborationInvitations</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid @RequestBody
  @Valid <a href="../model/RequestCollaboration.html" title="class in in.devstream.openapi.model">RequestCollaboration</a>&nbsp;requestCollaboration)</span></div>
 <div class="block">POST /content/collaboration/{ContentID} : Invite users to collaborate on content.</div>
@@ -371,13 +371,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updateContentStatusById(java.lang.String,in.devstream.openapi.model.RequestUpdateContentStatusByID)">
+<section class="detail" id="updateContentStatusById(java.util.UUID,in.devstream.openapi.model.RequestUpdateContentStatusByID)">
 <h3>updateContentStatusById</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=PATCH,
                 value="/content/status/{ContentID}",
                 consumes="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">updateContentStatusById</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid @RequestBody
  @Valid <a href="../model/RequestUpdateContentStatusByID.html" title="class in in.devstream.openapi.model">RequestUpdateContentStatusByID</a>&nbsp;requestUpdateContentStatusByID)</span></div>
 <div class="block">PATCH /content/status/{ContentID} : Changes content status for a particular content.</div>
@@ -392,13 +392,13 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="updatePendingInvitesForContentById(java.lang.String,in.devstream.openapi.model.RequestCollaborationAction)">
+<section class="detail" id="updatePendingInvitesForContentById(java.util.UUID,in.devstream.openapi.model.RequestCollaborationAction)">
 <h3>updatePendingInvitesForContentById</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=PATCH,
                 value="/content/collaboration/{ContentID}",
                 consumes="application/json")
 </span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">updatePendingInvitesForContentById</span><wbr><span class="parameters">(@PathVariable("ContentID")
- <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;contentID,
+ <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;contentID,
  @Valid @RequestBody
  @Valid <a href="../model/RequestCollaborationAction.html" title="class in in.devstream.openapi.model">RequestCollaborationAction</a>&nbsp;requestCollaborationAction)</span></div>
 <div class="block">PATCH /content/collaboration/{ContentID} : Accept or decline invitations.
