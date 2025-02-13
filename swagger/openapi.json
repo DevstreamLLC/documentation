@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.64"
+    "version" : "0.3.65"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -1378,6 +1378,7 @@
           },
           "uptime" : {
             "description" : "Server uptime in milliseconds in UNIX format",
+            "format" : "int64",
             "type" : "integer"
           },
           "status" : {
@@ -1394,6 +1395,12 @@
       },
       "TypeUserGender" : {
         "enum" : [ "Male", "Female", "Transgender" ],
+        "type" : "string"
+      },
+      "TypeUsername" : {
+        "maxLength" : 36,
+        "minLength" : 4,
+        "readOnly" : true,
         "type" : "string"
       },
       "ResponseGetUserProfile" : {
@@ -1420,10 +1427,7 @@
             "type" : "string"
           },
           "username" : {
-            "maxLength" : 24,
-            "minLength" : 4,
-            "readOnly" : true,
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypeUsername"
           },
           "email" : {
             "format" : "email",
@@ -1453,9 +1457,10 @@
       "RequestUpdateUserProfile" : {
         "properties" : {
           "username" : {
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypeUsername"
           },
           "avatarURL" : {
+            "format" : "uri-reference",
             "type" : "string"
           }
         },
@@ -1482,6 +1487,7 @@
       "RequestUpdateUserSettings" : {
         "properties" : {
           "notifications" : {
+            "description" : "Whether notifications is on for the user or not.",
             "type" : "boolean"
           },
           "visibility" : {
@@ -1491,10 +1497,15 @@
         "required" : [ "notifications", "visibility" ],
         "type" : "object"
       },
+      "TypeUserID" : {
+        "description" : "A unique identifier for user.",
+        "format" : "uuid",
+        "type" : "string"
+      },
       "ResponseGetUserAnalytics" : {
         "properties" : {
           "userID" : {
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypeUserID"
           },
           "totalContent" : {
             "description" : "Total number of content the user has uploaded.",
@@ -1532,6 +1543,7 @@
             "writeOnly" : true
           },
           "password" : {
+            "format" : "password",
             "type" : "string",
             "writeOnly" : true
           }
@@ -1548,6 +1560,7 @@
           },
           "loginAttemptID" : {
             "description" : "This is to keep track of which login attempt will be validated using the two factor authentication OTP.",
+            "format" : "uuid",
             "type" : "string"
           },
           "loginAttemptTimeStamp" : {
@@ -1567,13 +1580,16 @@
         "type" : "object"
       },
       "RequestTwofactorAuth" : {
-        "description" : "Contains a pair of login attempt ID and it's corresponding OTP.",
+        "description" : "Contains a pair of login attempt ID and it's corresponding challenge.",
         "properties" : {
           "loginAttemptID" : {
+            "format" : "uuid",
             "type" : "string"
           },
           "oneTimePassword" : {
-            "type" : "integer"
+            "maxLength" : 8,
+            "minLength" : 4,
+            "type" : "string"
           }
         },
         "type" : "object"
@@ -1621,13 +1637,16 @@
             "$ref" : "#/components/schemas/TypeHonorifics"
           },
           "firstname" : {
+            "maxLength" : 24,
             "minLength" : 1,
             "type" : "string"
           },
           "middlename" : {
+            "maxLength" : 24,
             "type" : "string"
           },
           "lastname" : {
+            "maxLength" : 24,
             "minLength" : 1,
             "type" : "string"
           },
@@ -1639,10 +1658,7 @@
             "type" : "string"
           },
           "username" : {
-            "maxLength" : 24,
-            "minLength" : 4,
-            "readOnly" : true,
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypeUsername"
           },
           "email" : {
             "format" : "email",
@@ -1650,7 +1666,7 @@
           },
           "password" : {
             "format" : "password",
-            "maxLength" : 24,
+            "maxLength" : 32,
             "minLength" : 8,
             "type" : "string",
             "writeOnly" : true
@@ -1741,6 +1757,8 @@
             "$ref" : "#/components/schemas/TypeRecoveryToken"
           },
           "challenge" : {
+            "maxLength" : 8,
+            "minLength" : 4,
             "type" : "string"
           }
         },
@@ -1793,12 +1811,12 @@
       "TypeContentID" : {
         "description" : "ID of the uploaded content",
         "example" : "acde070d-8c4c-4f0d-9d8a-162843c10333",
+        "format" : "uuid",
         "type" : "string"
       },
       "TypePipelineID" : {
         "description" : "Identifier to uniquely identify a saved pipeline.",
         "format" : "uuid",
-        "minLength" : 1,
         "type" : "string"
       },
       "TypeContentDetails" : {
@@ -1896,7 +1914,7 @@
             "$ref" : "#/components/schemas/TypeContentID"
           },
           "userID" : {
-            "type" : "string"
+            "$ref" : "#/components/schemas/TypeUserID"
           },
           "permission" : {
             "$ref" : "#/components/schemas/TypeContentPermission"
@@ -1924,6 +1942,7 @@
       "RequestCollaborationAction" : {
         "properties" : {
           "invitationID" : {
+            "format" : "uuid",
             "type" : "string"
           },
           "action" : {
