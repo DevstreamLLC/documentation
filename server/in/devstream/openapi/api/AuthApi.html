@@ -107,23 +107,12 @@ loadScripts(document, 'script');</script>
 <div class="table-header col-second">Method</div>
 <div class="table-header col-last">Description</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a>&gt;</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#authLogin(java.lang.String,java.lang.String)" class="member-name-link">authLogin</a><wbr>(@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;email,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;password)</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#authLogin(in.devstream.openapi.model.RequestLogin)" class="member-name-link">authLogin</a><wbr>(@Valid <a href="../model/RequestLogin.html" title="class in in.devstream.openapi.model">RequestLogin</a>&nbsp;requestLogin)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">POST /auth/login : Let&#39;s the user login to the system with given credentials.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#authRegister(java.lang.String,java.lang.String,in.devstream.openapi.model.TypeUserGender,java.time.LocalDate,java.lang.String,java.lang.String,java.lang.String,java.lang.String,in.devstream.openapi.model.TypeHonorifics,java.lang.String,java.lang.Boolean)" class="member-name-link">authRegister</a><wbr>(@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;firstname,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;lastname,
- @Valid <a href="../model/TypeUserGender.html" title="enum class in in.devstream.openapi.model">TypeUserGender</a>&nbsp;gender,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;dateOfBirth,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;username,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;email,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;password,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mobileNumber,
- @Valid <a href="../model/TypeHonorifics.html" title="enum class in in.devstream.openapi.model">TypeHonorifics</a>&nbsp;honorifics,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;middlename,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;twoFactorAuthentication)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#authRegister(in.devstream.openapi.model.RequestRegister)" class="member-name-link">authRegister</a><wbr>(@Valid <a href="../model/RequestRegister.html" title="class in in.devstream.openapi.model">RequestRegister</a>&nbsp;requestRegister)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">POST /auth/register : Registers a new user into the system.</div>
 </div>
@@ -133,8 +122,7 @@ loadScripts(document, 'script');</script>
 <div class="block">POST /auth/revalidate : Revalidates an authentication token.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code>org.springframework.http.ResponseEntity<wbr>&lt;<a href="../model/ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a>&gt;</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#twoFactorAuth(java.util.UUID,java.lang.String)" class="member-name-link">twoFactorAuth</a><wbr>(@Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID,
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oneTimePassword)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3"><code><a href="#twoFactorAuth(in.devstream.openapi.model.RequestTwofactorAuth)" class="member-name-link">twoFactorAuth</a><wbr>(@Valid <a href="../model/RequestTwofactorAuth.html" title="class in in.devstream.openapi.model">RequestTwofactorAuth</a>&nbsp;requestTwofactorAuth)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab3">
 <div class="block">POST /auth/two-factor-auth : Endpoint to validate OTP for two factor authentication.</div>
 </div>
@@ -153,21 +141,18 @@ loadScripts(document, 'script');</script>
 <h2>Method Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="authLogin(java.lang.String,java.lang.String)">
+<section class="detail" id="authLogin(in.devstream.openapi.model.RequestLogin)">
 <h3>authLogin</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
                 value="/auth/login",
                 produces="application/json",
-                consumes={"application/x-www-form-urlencoded","application/json"})
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a>&gt;</span>&nbsp;<span class="element-name">authLogin</span><wbr><span class="parameters">(@Valid @RequestParam(value="email",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;email,
- @Valid @RequestParam(value="password",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;password)</span></div>
+                consumes="application/json")
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a>&gt;</span>&nbsp;<span class="element-name">authLogin</span><wbr><span class="parameters">(@Valid @RequestBody
+ @Valid <a href="../model/RequestLogin.html" title="class in in.devstream.openapi.model">RequestLogin</a>&nbsp;requestLogin)</span></div>
 <div class="block">POST /auth/login : Let&#39;s the user login to the system with given credentials.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>email</code> - (required)</dd>
-<dd><code>password</code> - (required)</dd>
+<dd><code>requestLogin</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>Login successful. (status code 200)
          or Found. User is already authenticated and redirected. (status code 302)
@@ -179,48 +164,18 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="authRegister(java.lang.String,java.lang.String,in.devstream.openapi.model.TypeUserGender,java.time.LocalDate,java.lang.String,java.lang.String,java.lang.String,java.lang.String,in.devstream.openapi.model.TypeHonorifics,java.lang.String,java.lang.Boolean)">
+<section class="detail" id="authRegister(in.devstream.openapi.model.RequestRegister)">
 <h3>authRegister</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
                 value="/auth/register",
                 produces="application/json",
-                consumes={"application/x-www-form-urlencoded","application/json"})
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">authRegister</span><wbr><span class="parameters">(@Valid @RequestParam(value="firstname",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;firstname,
- @Valid @RequestParam(value="lastname",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;lastname,
- @Valid @RequestParam(value="gender",required=true)
- @Valid <a href="../model/TypeUserGender.html" title="enum class in in.devstream.openapi.model">TypeUserGender</a>&nbsp;gender,
- @Valid @RequestParam(value="dateOfBirth",required=true) @DateTimeFormat(iso=DATE)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/time/LocalDate.html" title="class or interface in java.time" class="external-link">LocalDate</a>&nbsp;dateOfBirth,
- @Valid @RequestParam(value="username",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;username,
- @Valid @RequestParam(value="email",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;email,
- @Valid @RequestParam(value="password",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;password,
- @Valid @RequestParam(value="mobileNumber",required=true)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;mobileNumber,
- @Valid @RequestParam(value="honorifics",required=false)
- @Valid <a href="../model/TypeHonorifics.html" title="enum class in in.devstream.openapi.model">TypeHonorifics</a>&nbsp;honorifics,
- @Valid @RequestParam(value="middlename",required=false)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;middlename,
- @Valid @RequestParam(value="twoFactorAuthentication",required=false)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Boolean.html" title="class or interface in java.lang" class="external-link">Boolean</a>&nbsp;twoFactorAuthentication)</span></div>
+                consumes="application/json")
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Void.html" title="class or interface in java.lang" class="external-link">Void</a>&gt;</span>&nbsp;<span class="element-name">authRegister</span><wbr><span class="parameters">(@Valid @RequestBody
+ @Valid <a href="../model/RequestRegister.html" title="class in in.devstream.openapi.model">RequestRegister</a>&nbsp;requestRegister)</span></div>
 <div class="block">POST /auth/register : Registers a new user into the system.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>firstname</code> - (required)</dd>
-<dd><code>lastname</code> - (required)</dd>
-<dd><code>gender</code> - (required)</dd>
-<dd><code>dateOfBirth</code> - (required)</dd>
-<dd><code>username</code> - (required)</dd>
-<dd><code>email</code> - (required)</dd>
-<dd><code>password</code> - (required)</dd>
-<dd><code>mobileNumber</code> - (required)</dd>
-<dd><code>honorifics</code> - (optional)</dd>
-<dd><code>middlename</code> - (optional)</dd>
-<dd><code>twoFactorAuthentication</code> - Whether two factor authentication hould be used or not. (optional, default to true)</dd>
+<dd><code>requestRegister</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>Registration successful. (status code 201)
          or Found. User is already authenticated and redirected. (status code 302)
@@ -252,22 +207,19 @@ loadScripts(document, 'script');</script>
 </section>
 </li>
 <li>
-<section class="detail" id="twoFactorAuth(java.util.UUID,java.lang.String)">
+<section class="detail" id="twoFactorAuth(in.devstream.openapi.model.RequestTwofactorAuth)">
 <h3>twoFactorAuth</h3>
 <div class="member-signature"><span class="annotations">@RequestMapping(method=POST,
                 value="/auth/two-factor-auth",
                 produces="application/json",
-                consumes={"application/x-www-form-urlencoded","application/json"})
-</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a>&gt;</span>&nbsp;<span class="element-name">twoFactorAuth</span><wbr><span class="parameters">(@Valid @RequestParam(value="loginAttemptID",required=false)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/UUID.html" title="class or interface in java.util" class="external-link">UUID</a>&nbsp;loginAttemptID,
- @Valid @RequestParam(value="oneTimePassword",required=false)
- @Valid <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html" title="class or interface in java.lang" class="external-link">String</a>&nbsp;oneTimePassword)</span></div>
+                consumes="application/json")
+</span><span class="return-type">org.springframework.http.ResponseEntity&lt;<a href="../model/ResponseLogin.html" title="class in in.devstream.openapi.model">ResponseLogin</a>&gt;</span>&nbsp;<span class="element-name">twoFactorAuth</span><wbr><span class="parameters">(@Valid @RequestBody
+ @Valid <a href="../model/RequestTwofactorAuth.html" title="class in in.devstream.openapi.model">RequestTwofactorAuth</a>&nbsp;requestTwofactorAuth)</span></div>
 <div class="block">POST /auth/two-factor-auth : Endpoint to validate OTP for two factor authentication.
  This is to validate the OTP generated if two factor authentication is enabled. The login ID must be tagged along with the OTP to map which login attempt this OTP belongs to.</div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>loginAttemptID</code> - (optional)</dd>
-<dd><code>oneTimePassword</code> - (optional)</dd>
+<dd><code>requestTwofactorAuth</code> - (required)</dd>
 <dt>Returns:</dt>
 <dd>OTP is valid for the given login ID. Hence user is authenticated and both access and refresh tokens are granted. (status code 200)
          or Bad request. Either OTP or login ID or both are missing. (status code 400)

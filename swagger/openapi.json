@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.72"
+    "version" : "0.3.73"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -291,11 +291,6 @@
         "operationId" : "auth-login",
         "requestBody" : {
           "content" : {
-            "application/x-www-form-urlencoded" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/RequestLogin"
-              }
-            },
             "application/json" : {
               "schema" : {
                 "$ref" : "#/components/schemas/RequestLogin"
@@ -353,11 +348,6 @@
         "operationId" : "two-factor-auth",
         "requestBody" : {
           "content" : {
-            "application/x-www-form-urlencoded" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/RequestTwofactorAuth"
-              }
-            },
             "application/json" : {
               "schema" : {
                 "$ref" : "#/components/schemas/RequestTwofactorAuth"
@@ -408,11 +398,6 @@
         "operationId" : "auth-register",
         "requestBody" : {
           "content" : {
-            "application/x-www-form-urlencoded" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/RequestRegister"
-              }
-            },
             "application/json" : {
               "schema" : {
                 "$ref" : "#/components/schemas/RequestRegister"
