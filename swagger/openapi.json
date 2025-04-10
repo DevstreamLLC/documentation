@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "0.3.73"
+    "version" : "%npm_package_version%"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
@@ -350,7 +350,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/RequestTwofactorAuth"
+                "$ref" : "#/components/schemas/RequestTwoFactorAuth"
               }
             }
           },
@@ -1564,7 +1564,7 @@
         "required" : [ "accessToken", "loginAttemptID", "loginAttemptTimeStamp", "refreshToken", "requiresTwoFactorAuth" ],
         "type" : "object"
       },
-      "RequestTwofactorAuth" : {
+      "RequestTwoFactorAuth" : {
         "description" : "Contains a pair of login attempt ID and it's corresponding challenge.",
         "properties" : {
           "loginAttemptID" : {
