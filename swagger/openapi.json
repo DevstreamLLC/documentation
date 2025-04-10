@@ -8,7 +8,7 @@
     },
     "termsOfService" : "https://www.devstream.in/terms-and-conditions",
     "title" : "Devstream Aurelia OpenAPI Specification",
-    "version" : "%npm_package_version%"
+    "version" : "0.3.75"
   },
   "servers" : [ {
     "url" : "{protocol}://{environment}.devstream.in/v1",
